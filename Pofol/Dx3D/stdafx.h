@@ -13,9 +13,13 @@
 
 // C 런타임 헤더 파일입니다.
 #include <stdlib.h>
+#include <stdio.h>
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
+
+//C++ 런타임 헤더 파일
+#include <iostream>
 
 
 // TODO: 프로그램에 필요한 추가 헤더는 여기에서 참조합니다.
@@ -29,8 +33,16 @@
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
 
+//==================================================================
+//		## 네임스페이스 추가 ##
+//==================================================================
+using namespace std;
+
 extern HWND	g_hWnd;
 
+//==================================================================
+//		## 매크로 추가 ##
+//==================================================================
 #define SAFE_DELETE_ARRAY(p) if (p) { delete [] (p); } (p) = NULL;
 #define SAFE_DELETE(p) if (p) { delete (p); } (p) = NULL;
 #define SAFE_RELEASE(p) if (p) { (p)->Release(); } (p) = NULL;
@@ -69,15 +81,9 @@ public: virtual void Set##funName(varType var){\
 	}\
 }
 
-// 1. Position 정점의 좌표 x,y,z(float)			: D3DFVF_XYZ
-// 2. RHW (float)                               : D3DFVF_XYZRHW (D3DFVF_XYZ 또는 D3DFVF_NORMAL과 같이 사용불가)
-// 3. Blending Weight Data 결합 가중치 (float)	: D3DFVF_XYZB1 ~ D3DFVF_XYZB5
-// 4. Vertex Normal 정점의 법선 벡터 x,y,z(float)	: D3DFVF_NORMAL
-// 5. Vertex Point Size 정점의 점 크기 (float)	: D3DFVF_PSIZE
-// 6. Diffuse Color (DWORD)						: D3DFVF_DIFFUSE
-// 7. Specular Color (DWORD)                    : D3DFVF_SPECULAR
-// 8. Texture Coordinate Set 1 (float)          : D3DFVF_TEX0 - D3DFVF_TEX8
-
+//==================================================================
+//		## 구조체 추가 ##
+//==================================================================
 struct ST_PC_VERTEX
 {
 	D3DXVECTOR3 p;
@@ -88,6 +94,15 @@ struct ST_PC_VERTEX
 
 	enum { FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE, };
 };
+
+// 1. Position 정점의 좌표 x,y,z(float)			: D3DFVF_XYZ
+// 2. RHW (float)                               : D3DFVF_XYZRHW (D3DFVF_XYZ 또는 D3DFVF_NORMAL과 같이 사용불가)
+// 3. Blending Weight Data 결합 가중치 (float)	: D3DFVF_XYZB1 ~ D3DFVF_XYZB5
+// 4. Vertex Normal 정점의 법선 벡터 x,y,z(float)	: D3DFVF_NORMAL
+// 5. Vertex Point Size 정점의 점 크기 (float)	: D3DFVF_PSIZE
+// 6. Diffuse Color (DWORD)						: D3DFVF_DIFFUSE
+// 7. Specular Color (DWORD)                    : D3DFVF_SPECULAR
+// 8. Texture Coordinate Set 1 (float)          : D3DFVF_TEX0 - D3DFVF_TEX8
 
 struct ST_PT_VERTEX
 {
@@ -149,6 +164,11 @@ struct ST_SIZE
 	ST_SIZE(float _w, float _h) : fWidth(_w), fHeight(_h) {}
 };
 
+//==================================================================
+//		## 내가 만든 헤더파일을 이곳에 추가한다 ##
+//==================================================================
+#include "cKeyManager.h"
+#include "cSoundManager.h"
 #include "cDeviceManager.h"
 #include "cTimeManager.h"
 #include "cTextureManager.h"

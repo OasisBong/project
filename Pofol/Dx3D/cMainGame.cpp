@@ -15,7 +15,6 @@ cMainGame::cMainGame(void)
 	, m_pGrid(NULL)
 	, m_pCharController(NULL)
 	, m_pMap(NULL)
-	, m_pSkinnedMesh(NULL)
 	, m_pFiona(NULL)
 {
 }
@@ -26,18 +25,14 @@ cMainGame::~cMainGame(void)
 	SAFE_DELETE(m_pGrid);
 	SAFE_DELETE(m_pCharController);
 	SAFE_DELETE(m_pMap);	
-	SAFE_RELEASE(m_mapMesh);
 	SAFE_DELETE(m_pFiona);
-	
-	/*for each (auto p in m_vecSkinnedMesh)
-	{
-		SAFE_DELETE(p);
-	}*/
 
-	for each (auto p in m_vecMtlTex)
-	{
-		SAFE_RELEASE(p);
-	}
+
+	//SAFE_RELEASE(m_mapMesh);
+	//for each (auto p in m_vecMtlTex)
+	//{
+	//	SAFE_RELEASE(p);
+	//}
 
 	g_pFontManager->Destroy();
 	g_pTextureManager->Destroy();
@@ -54,28 +49,18 @@ void cMainGame::Setup()
 	m_pGrid = new cGrid;
 	m_pGrid->Setup(30);
 	
-	cObjLoader* pMap = new cObjLoader;
+	// Vindictus Map Test
+	//cObjLoader* pMap = new cObjLoader;
+	//m_mapMesh = pMap->Load("obj/map_1.obj", m_vecMtlTex);
 
-	m_mapMesh = pMap->Load("obj/map_1.obj", m_vecMtlTex);
-	//cHeightMap* pMap = new cHeightMap;
-	//pMap->Load("HeightMapData", "HeightMap.raw", "terrain.jpg");
-	//m_pMap = pMap;
+	// HeightMap Dummy
+	cHeightMap* pMap = new cHeightMap;
+	pMap->Load("HeightMapData", "HeightMap.raw", "terrain.jpg");
+	m_pMap = pMap;
 
 	
 	m_pFiona = new cFiona;
 	m_pFiona->Setup();
-
-// 	for (int x = -20; x <= 20; ++x)
-// 	{
-// 		for (int z = 0; z <= 20; ++z)
-// 		{
-// 			cSkinnedMesh* p = new cSkinnedMesh("Zealot/", "zealot.X");
-// 			p->SetPosition(D3DXVECTOR3(x, 0, z));
-// 			p->SetRandomTrackPosition();
-// 			p->SetAnimationIndex(rand() % 5);
-// 			m_vecSkinnedMesh.push_back(p);
-// 		}
-// 	}
 
 	m_pCharController = new cCharController;
 
@@ -87,7 +72,7 @@ void cMainGame::Update()
 	g_pTimeManager->Update();
 	
 	if(m_pCharController)
-		m_pCharController->Update( ); // m_pMap);
+		m_pCharController->Update(m_pMap);
 
 	if (m_pFiona)
 	{
@@ -97,12 +82,6 @@ void cMainGame::Update()
 	if(m_pCamera)
 		m_pCamera->Update(m_pCharController->GetPosition());
 
-// 	if(m_pSkinnedMesh)
-// 	{
-// 		D3DXMATRIXA16 mat;
-// 		D3DXMatrixTranslation(&mat, 1, 0, 0);
-// 		m_pSkinnedMesh->Update(&mat);
-// 	}
 	g_pAutoReleasePool->Drain();
 }
 
@@ -121,35 +100,31 @@ void cMainGame::Render()
 	if(m_pGrid)
 		m_pGrid->Render();
 	
-	
-
-	//if(m_pMap)
-	//{
-	//	m_pMap->Render();
-	//}
-
-	//for each (auto p in m_vecSkinnedMesh)
-	//{
-	//	p->UpdateAndRender();
-	//}
-
-	D3DXMATRIXA16 world, matS, matT;
-	D3DXMatrixIdentity(&world);
-	D3DXMatrixIdentity(&matS);
-	D3DXMatrixIdentity(&matT);
-	D3DXMatrixScaling(&matS, 0.25f, 0.25f, 0.25f);
-	D3DXMatrixTranslation(&matT, -1900.0f, 0.f, 0.f);
-	world = matS * matT;
-
-	for (size_t i = 0; i < m_vecMtlTex.size(); i++)
+	//HeightMap Render
+	if(m_pMap)
 	{
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, &world);
-		g_pD3DDevice->SetMaterial(&m_vecMtlTex[i]->GetMtl());
-		g_pD3DDevice->SetTexture(0, m_vecMtlTex[i]->GetTexture());
-		m_mapMesh->DrawSubset(i);
+		m_pMap->Render();
 	}
 
-	m_pFiona->Render();//  m_pCharController->GetWorldTM());
+	// Vindictus Map test
+
+	//D3DXMATRIXA16 world, matS, matT;
+	//D3DXMatrixIdentity(&world);
+	//D3DXMatrixIdentity(&matS);
+	//D3DXMatrixIdentity(&matT);
+	//D3DXMatrixScaling(&matS, 0.25f, 0.25f, 0.25f);
+	//D3DXMatrixTranslation(&matT, -1900.0f, 0.f, 0.f);
+	//world = matS * matT;
+
+	//for (size_t i = 0; i < m_vecMtlTex.size(); i++)
+	//{
+	//	g_pD3DDevice->SetTransform(D3DTS_WORLD, &world);
+	//	g_pD3DDevice->SetMaterial(&m_vecMtlTex[i]->GetMtl());
+	//	g_pD3DDevice->SetTexture(0, m_vecMtlTex[i]->GetTexture());
+	//	m_mapMesh->DrawSubset(i);
+	//}
+
+	m_pFiona->Render();
 
 	g_pD3DDevice->EndScene();
 

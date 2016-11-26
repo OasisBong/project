@@ -15,12 +15,15 @@ private:
 	cCamera*					m_pCamera;
 	cGrid*						m_pGrid;
 	cCharController*			m_pCharController;
-	iMap*						m_pMap;
-	std::vector<cSkinnedMesh*>	m_vecSkinnedMesh;
-	LPD3DXMESH					m_mapMesh;
-	std::vector<cMtlTex*>		m_vecMtlTex;
-	cSkinnedMesh*				m_pSkinnedMesh;
+
 	cFiona*						m_pFiona;
+	
+	//HeightMap
+	iMap*						m_pMap;
+	
+	//Vindictus Map test
+	//LPD3DXMESH					m_mapMesh;
+	//std::vector<cMtlTex*>		m_vecMtlTex;
 	
 public:
 	cMainGame(void);

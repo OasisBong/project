@@ -183,13 +183,7 @@
     <ClInclude Include="cSkinnedMesh.h">
       <Filter>Loader\X file</Filter>
     </ClInclude>
-    <ClInclude Include="KeyManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="singletonBase.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="soundManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="cFiona.h">
@@ -203,6 +197,18 @@
     </ClInclude>
     <ClInclude Include="cCube.h">
       <Filter>Character\Etc.</Filter>
+    </ClInclude>
+    <ClInclude Include="cKeyManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="cSoundManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="cRegina.h">
+      <Filter>Character\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="hStruct.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -311,12 +317,6 @@
     <ClCompile Include="cHeightMap.cpp">
       <Filter>Map</Filter>
     </ClCompile>
-    <ClCompile Include="KeyManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="soundManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="cFiona.cpp">
       <Filter>Character\PlayerChar</Filter>
     </ClCompile>
@@ -328,6 +328,15 @@
     </ClCompile>
     <ClCompile Include="cCube.cpp">
       <Filter>Character\Etc.</Filter>
+    </ClCompile>
+    <ClCompile Include="cKeyManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="cSoundManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="cRegina.cpp">
+      <Filter>Character\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

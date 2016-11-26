@@ -6,7 +6,7 @@ cCharController::cCharController(void)
 	: m_vPosition(0, 0, 0)
 	, m_vDirection(0, 0, 1)
 	, m_fAngle(0.0f)
-	, m_fSpeed(1.1f)
+	, m_fSpeed(0.5f)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 }
@@ -32,14 +32,16 @@ void cCharController::Update(iMap* pMap)
 	D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &matRotY);
 
 	D3DXVECTOR3 p = m_vPosition;
-	if (GetKeyState('W') & 0x8000)
-	{
-		m_vPosition = m_vPosition - m_vDirection * m_fSpeed;
-	}
-	if (GetKeyState('S') & 0x8000)
-	{
-		m_vPosition = m_vPosition + m_vDirection * m_fSpeed;
-	}
+
+	// 높이 맵 미적용
+	//if (GetKeyState('W') & 0x8000)
+	//{
+	//	m_vPosition = m_vPosition - m_vDirection * m_fSpeed;
+	//}
+	//if (GetKeyState('S') & 0x8000)
+	//{
+	//	m_vPosition = m_vPosition + m_vDirection * m_fSpeed;
+	//}
 
 	if (GetKeyState('E') & 0x8000)
 	{
@@ -49,19 +51,21 @@ void cCharController::Update(iMap* pMap)
 	{
 		m_vPosition.y -= m_fSpeed;
 	}
-	//if (GetKeyState('W') & 0x8000)
-	//{
-	//	p = p - m_vDirection * m_fSpeed;
-	//}
-	//if (GetKeyState('S') & 0x8000)
-	//{
-	//	p = p + m_vDirection * m_fSpeed;
-	//}
-	//
-	//if(pMap && pMap->GetHeight(p.x, p.y, p.z))
-	//{
-	//	m_vPosition = p;
-	//}
+
+	//높이맵 적용
+	if (GetKeyState('W') & 0x8000)
+	{
+		p = p - m_vDirection * m_fSpeed;
+	}
+	if (GetKeyState('S') & 0x8000)
+	{
+		p = p + m_vDirection * m_fSpeed;
+	}
+	
+	if(pMap && pMap->GetHeight(p.x, p.y, p.z))
+	{
+		m_vPosition = p;
+	}
 
 	D3DXMATRIXA16 matT;
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);

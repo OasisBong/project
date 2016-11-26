@@ -109,6 +109,7 @@
     <ClInclude Include="cObjMap.h" />
     <ClInclude Include="cPyramid.h" />
     <ClInclude Include="cRay.h" />
+    <ClInclude Include="cRegina.h" />
     <ClInclude Include="cSkinnedMesh.h" />
     <ClInclude Include="cSkinnedMeshManager.h" />
     <ClInclude Include="cSokobanChar.h" />
@@ -119,12 +120,13 @@
     <ClInclude Include="cUIObject.h" />
     <ClInclude Include="cUITextView.h" />
     <ClInclude Include="Dx3D.h" />
+    <ClInclude Include="hStruct.h" />
     <ClInclude Include="iCharacter.h" />
     <ClInclude Include="iMap.h" />
-    <ClInclude Include="KeyManager.h" />
+    <ClInclude Include="cKeyManager.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="singletonBase.h" />
-    <ClInclude Include="soundManager.h" />
+    <ClInclude Include="cSoundManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -155,6 +157,7 @@
     <ClCompile Include="cObjMap.cpp" />
     <ClCompile Include="cPyramid.cpp" />
     <ClCompile Include="cRay.cpp" />
+    <ClCompile Include="cRegina.cpp" />
     <ClCompile Include="cSkinnedMesh.cpp" />
     <ClCompile Include="cSkinnedMeshManager.cpp" />
     <ClCompile Include="cSokobanChar.cpp" />
@@ -167,8 +170,8 @@
     <ClCompile Include="Dx3D.cpp" />
     <ClCompile Include="iCharacter.cpp" />
     <ClCompile Include="iMap.cpp" />
-    <ClCompile Include="KeyManager.cpp" />
-    <ClCompile Include="soundManager.cpp" />
+    <ClCompile Include="cKeyManager.cpp" />
+    <ClCompile Include="cSoundManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
