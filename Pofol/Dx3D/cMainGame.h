@@ -7,6 +7,7 @@ class cGroup;
 class iMap;
 class cSkinnedMesh;
 class cMtlTex;
+class cFiona;
 
 class cMainGame
 {
@@ -19,6 +20,7 @@ private:
 	LPD3DXMESH					m_mapMesh;
 	std::vector<cMtlTex*>		m_vecMtlTex;
 	cSkinnedMesh*				m_pSkinnedMesh;
+	cFiona*						m_pFiona;
 	
 public:
 	cMainGame(void);

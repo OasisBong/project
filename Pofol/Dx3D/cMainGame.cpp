@@ -8,6 +8,7 @@
 #include "cHeightMap.h"
 #include "cObjLoader.h"
 #include "cMtlTex.h"
+#include "cFiona.h"
 
 cMainGame::cMainGame(void)
 	: m_pCamera(NULL)
@@ -15,6 +16,7 @@ cMainGame::cMainGame(void)
 	, m_pCharController(NULL)
 	, m_pMap(NULL)
 	, m_pSkinnedMesh(NULL)
+	, m_pFiona(NULL)
 {
 }
 
@@ -23,14 +25,14 @@ cMainGame::~cMainGame(void)
 	SAFE_DELETE(m_pCamera);
 	SAFE_DELETE(m_pGrid);
 	SAFE_DELETE(m_pCharController);
-	SAFE_DELETE(m_pMap);
-	SAFE_DELETE(m_pSkinnedMesh);	
+	SAFE_DELETE(m_pMap);	
 	SAFE_RELEASE(m_mapMesh);
+	SAFE_DELETE(m_pFiona);
 	
-	for each (auto p in m_vecSkinnedMesh)
+	/*for each (auto p in m_vecSkinnedMesh)
 	{
 		SAFE_DELETE(p);
-	}
+	}*/
 
 	for each (auto p in m_vecMtlTex)
 	{
@@ -53,13 +55,16 @@ void cMainGame::Setup()
 	m_pGrid->Setup(30);
 	
 	cObjLoader* pMap = new cObjLoader;
+
 	m_mapMesh = pMap->Load("obj/map_1.obj", m_vecMtlTex);
 	//cHeightMap* pMap = new cHeightMap;
 	//pMap->Load("HeightMapData", "HeightMap.raw", "terrain.jpg");
 	//m_pMap = pMap;
 
-	m_pSkinnedMesh = new cSkinnedMesh("monster/regina/", "regina.X");
 	
+	m_pFiona = new cFiona;
+	m_pFiona->Setup();
+
 // 	for (int x = -20; x <= 20; ++x)
 // 	{
 // 		for (int z = 0; z <= 20; ++z)
@@ -83,6 +88,11 @@ void cMainGame::Update()
 	
 	if(m_pCharController)
 		m_pCharController->Update( ); // m_pMap);
+
+	if (m_pFiona)
+	{
+		m_pFiona->Update(m_pCharController->GetWorldTM());
+	}
 
 	if(m_pCamera)
 		m_pCamera->Update(m_pCharController->GetPosition());
@@ -111,26 +121,17 @@ void cMainGame::Render()
 	if(m_pGrid)
 		m_pGrid->Render();
 	
+	
 
 	//if(m_pMap)
 	//{
 	//	m_pMap->Render();
 	//}
 
-	if (m_pSkinnedMesh)
-	{
-		D3DXMATRIXA16 matS;
-		D3DXMatrixIdentity(&matS);
-		D3DXMatrixScaling(&matS, 0.05f, 0.05f, 0.05f);
-		matS = matS * m_pCharController->GetWorldTM();
-		m_pSkinnedMesh->UpdateAndRender(&matS);
-		//m_pSkinnedMesh->UpdateAndRender(&m_pCharController->GetWorldTM());
-	}
-
-	for each (auto p in m_vecSkinnedMesh)
-	{
-		p->UpdateAndRender();
-	}
+	//for each (auto p in m_vecSkinnedMesh)
+	//{
+	//	p->UpdateAndRender();
+	//}
 
 	D3DXMATRIXA16 world, matS, matT;
 	D3DXMatrixIdentity(&world);
@@ -147,6 +148,9 @@ void cMainGame::Render()
 		g_pD3DDevice->SetTexture(0, m_vecMtlTex[i]->GetTexture());
 		m_mapMesh->DrawSubset(i);
 	}
+
+	m_pFiona->Render();//  m_pCharController->GetWorldTM());
+
 	g_pD3DDevice->EndScene();
 
 	g_pD3DDevice->Present(NULL, NULL, NULL, NULL);
@@ -166,7 +170,7 @@ void cMainGame::WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam )
 			if (wParam == VK_SPACE)
 			{
 				static int n = 0;
-				m_pSkinnedMesh->SetAnimationIndex(&n);
+				m_pFiona->GetSkinnedMesh()->SetAnimationIndex(&n);
 				n++;
 			}
 		}
