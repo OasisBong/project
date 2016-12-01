@@ -1,20 +1,22 @@
 #pragma once
 
 #include "iMap.h"
-
-class cGroup;
+class cMtlTex;
 
 class cObjMap : public iMap
 {
 private:
-	std::vector<cGroup*>		m_vecGroup;
-	std::vector<D3DXVECTOR3>	m_vecSurface;
-
+	//Vindictus Map test
+	SYNTHESIZE(LPD3DXMESH, m_mapMesh, MapMesh);
+	SYNTHESIZE(vector<cMtlTex*>, m_vecMtlTex, vecMtlTex);
+	SYNTHESIZE(D3DXMATRIX, m_matWorld, MatWorld);
+	
+	//vector<D3DXVECTOR3*>	m_vecSurface;
 public:
 	cObjMap(void);
 	virtual ~cObjMap(void);
 
-	virtual void Load(char* szMap, char* szSurface, D3DXMATRIXA16* pmat);
+	virtual void Load(char* szMap, char* szSurface = NULL, D3DXMATRIXA16* pmat = NULL);
 
 	// iMap override
 	virtual bool GetHeight(IN float x, OUT float& y, IN float z) override;

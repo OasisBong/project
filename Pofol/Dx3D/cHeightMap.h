@@ -16,6 +16,7 @@ public:
 	virtual ~cHeightMap(void);
 
 	void Load(char* szFolder, char* szRaw, char* szTexture, DWORD dwBytePerPixel = 1);
+	bool GetHeightVec(D3DXVECTOR3& position);
 
 	// iMap override
 	virtual bool GetHeight(IN float x, OUT float& y, IN float z) override;

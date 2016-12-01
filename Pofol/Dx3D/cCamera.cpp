@@ -3,13 +3,13 @@
 
 
 cCamera::cCamera(void)
-	: m_vEye(0,100, 0)
+	: m_vEye(0,1000, 0)
 	, m_vLookAt(0, 0, 0)
 	, m_vUp(0, 1, 0)
 	, m_isLButtonDown(false)
 	, m_fAngleX(0.0f)
 	, m_fAngleY(0.0f)
-	, m_fDistance(5.0f)
+	, m_fDistance(200.0f)
 {
 	m_ptPrevMouse.x = 0;
 	m_ptPrevMouse.y = 0;
@@ -66,7 +66,7 @@ void cCamera::WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam )
 	switch(message)
 	{
 	case WM_MOUSEWHEEL:
-		m_fDistance -= GET_WHEEL_DELTA_WPARAM(wParam) / 100.f;
+		m_fDistance -= GET_WHEEL_DELTA_WPARAM(wParam) / 20.f;
 		break;
 	case WM_LBUTTONDOWN:
 		m_ptPrevMouse.x = LOWORD(lParam);

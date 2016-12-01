@@ -55,6 +55,21 @@
     <Filter Include="Character\Etc.">
       <UniqueIdentifier>{5b9fcc55-ed69-470a-91ef-265eefe76539}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{986d991b-5ed8-454d-b85e-f9b7c762e70a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map\Grid">
+      <UniqueIdentifier>{e08442e5-cc0c-442d-ae5a-92cb9ce6aa42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map\OBJ_Map">
+      <UniqueIdentifier>{985db041-d3e7-4451-aedd-d27058c83c3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map\Height_Map">
+      <UniqueIdentifier>{9c79c884-5bae-43d7-9da1-8b64173c0851}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character\Controller">
+      <UniqueIdentifier>{e417b480-c551-4fc1-bdeb-477e48883d92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -111,9 +126,6 @@
     <ClInclude Include="cCamera.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="cCharController.h">
-      <Filter>Character</Filter>
-    </ClInclude>
     <ClInclude Include="cDeviceManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -165,18 +177,6 @@
     <ClInclude Include="cFrame.h">
       <Filter>Loader</Filter>
     </ClInclude>
-    <ClInclude Include="cGrid.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="cHeightMap.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="cObjMap.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="cPyramid.h">
-      <Filter>Map</Filter>
-    </ClInclude>
     <ClInclude Include="iMap.h">
       <Filter>Map</Filter>
     </ClInclude>
@@ -210,6 +210,30 @@
     <ClInclude Include="hStruct.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="cItemBase.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="cGrid.h">
+      <Filter>Map\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="cPyramid.h">
+      <Filter>Map\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="cHeightMap.h">
+      <Filter>Map\Height_Map</Filter>
+    </ClInclude>
+    <ClInclude Include="cObjMap.h">
+      <Filter>Map\OBJ_Map</Filter>
+    </ClInclude>
+    <ClInclude Include="cCharController.h">
+      <Filter>Character\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="cSkillManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MY_UTIL.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -235,9 +259,6 @@
     </ClCompile>
     <ClCompile Include="cAutoReleasePool.cpp">
       <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="cCharController.cpp">
-      <Filter>Character</Filter>
     </ClCompile>
     <ClCompile Include="cDeviceManager.cpp">
       <Filter>Manager</Filter>
@@ -302,19 +323,7 @@
     <ClCompile Include="cAseLoader.cpp">
       <Filter>Loader\ASE Loader</Filter>
     </ClCompile>
-    <ClCompile Include="cObjMap.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="cGrid.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="cPyramid.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
     <ClCompile Include="iMap.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="cHeightMap.cpp">
       <Filter>Map</Filter>
     </ClCompile>
     <ClCompile Include="cFiona.cpp">
@@ -337,6 +346,27 @@
     </ClCompile>
     <ClCompile Include="cRegina.cpp">
       <Filter>Character\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="cItemBase.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="cGrid.cpp">
+      <Filter>Map\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="cPyramid.cpp">
+      <Filter>Map\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="cHeightMap.cpp">
+      <Filter>Map\Height_Map</Filter>
+    </ClCompile>
+    <ClCompile Include="cObjMap.cpp">
+      <Filter>Map\OBJ_Map</Filter>
+    </ClCompile>
+    <ClCompile Include="cCharController.cpp">
+      <Filter>Character\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="cSkillManager.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

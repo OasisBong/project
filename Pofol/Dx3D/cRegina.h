@@ -1,5 +1,6 @@
 #pragma once
 class cSkinnedMesh;
+class cHeightMap;
 
 class cRegina
 {
@@ -18,7 +19,8 @@ public:
 	~cRegina();
 
 	void Setup();
+	void Update();
 	void Update(D3DXMATRIX matWorld);
-	void Render();
+	void Render(cHeightMap* pMap = NULL);
 };
 

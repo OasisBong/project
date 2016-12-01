@@ -1,13 +1,17 @@
 #pragma once
+#include "hStruct.h"
+
 
 class cCamera;
 class cGrid;
 class cCharController;
 class cGroup;
 class iMap;
+class cObjMap;
 class cSkinnedMesh;
 class cMtlTex;
 class cFiona;
+class cRegina;
 
 class cMainGame
 {
@@ -17,13 +21,14 @@ private:
 	cCharController*			m_pCharController;
 
 	cFiona*						m_pFiona;
+	cRegina*					m_pRegina;
 	
 	//HeightMap
-	iMap*						m_pMap;
+	cObjMap*						m_pMap;
 	
 	//Vindictus Map test
-	//LPD3DXMESH					m_mapMesh;
-	//std::vector<cMtlTex*>		m_vecMtlTex;
+	LPD3DXMESH					m_mapMesh;
+	std::vector<cMtlTex*>		m_vecMtlTex;
 	
 public:
 	cMainGame(void);

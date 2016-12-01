@@ -112,6 +112,8 @@ void cSkinnedMesh::Render(ST_BONE* pBone /*= NULL*/)
 			( LPD3DXBONECOMBINATION )( pBoneMesh->pBufBoneCombos->GetBufferPointer() );
 
 		D3DXMATRIXA16 matViewProj, matView, matProj;
+
+		// alphatest Ã³¸®
 		g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, true);
 		g_pD3DDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 		g_pD3DDevice->SetRenderState(D3DRS_ALPHAREF, 0.5f);

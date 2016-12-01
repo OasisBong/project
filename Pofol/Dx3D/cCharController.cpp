@@ -6,7 +6,7 @@ cCharController::cCharController(void)
 	: m_vPosition(0, 0, 0)
 	, m_vDirection(0, 0, 1)
 	, m_fAngle(0.0f)
-	, m_fSpeed(0.5f)
+	, m_fSpeed(3.0f)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 }
@@ -43,15 +43,6 @@ void cCharController::Update(iMap* pMap)
 	//	m_vPosition = m_vPosition + m_vDirection * m_fSpeed;
 	//}
 
-	if (GetKeyState('E') & 0x8000)
-	{
-		m_vPosition.y += m_fSpeed;
-	}
-	if (GetKeyState('Q') & 0x8000)
-	{
-		m_vPosition.y -= m_fSpeed;
-	}
-
 	//³ôÀÌ¸Ê Àû¿ë
 	if (GetKeyState('W') & 0x8000)
 	{
@@ -65,6 +56,15 @@ void cCharController::Update(iMap* pMap)
 	if(pMap && pMap->GetHeight(p.x, p.y, p.z))
 	{
 		m_vPosition = p;
+	}
+
+	if (GetKeyState('E') & 0x8000)
+	{
+		m_vPosition.y += m_fSpeed;
+	}
+	if (GetKeyState('Q') & 0x8000)
+	{
+		m_vPosition.y -= m_fSpeed;
 	}
 
 	D3DXMATRIXA16 matT;

@@ -37,6 +37,7 @@
 //		## 네임스페이스 추가 ##
 //==================================================================
 using namespace std;
+using namespace MY_UTIL;
 
 extern HWND	g_hWnd;
 
@@ -173,6 +174,8 @@ struct ST_SIZE
 #include "cTimeManager.h"
 #include "cTextureManager.h"
 #include "cFontManager.h"
+#include "cSkillManager.h"
+
 
 #include "cObject.h"
 #include "cUIObject.h"

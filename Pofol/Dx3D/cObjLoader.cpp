@@ -202,7 +202,7 @@ LPD3DXMESH cObjLoader::Load( IN char* szFilename, OUT std::vector<cMtlTex*>& vec
 	LPD3DXMESH pMesh = NULL;
 	D3DXCreateMeshFVF(vecVertex.size() / 3,
 		vecVertex.size(),
-		D3DXMESH_MANAGED/* | D3DXMESH_32BIT*/,
+		D3DXMESH_MANAGED | D3DXMESH_32BIT,
 		ST_PNT_VERTEX::FVF,
 		g_pD3DDevice,
 		&pMesh);
@@ -212,9 +212,9 @@ LPD3DXMESH cObjLoader::Load( IN char* szFilename, OUT std::vector<cMtlTex*>& vec
 	memcpy(pV, &vecVertex[0], sizeof(ST_PNT_VERTEX) * vecVertex.size());
 	pMesh->UnlockVertexBuffer();
 
-	WORD* pI = NULL;
+	DWORD* pI = NULL;
 	pMesh->LockIndexBuffer(0, (LPVOID*)&pI);
-	for (WORD i = 0; i < vecVertex.size(); ++i)
+	for (DWORD i = 0; i < vecVertex.size(); ++i)
 	{
 		pI[i] = i;
 	}

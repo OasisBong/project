@@ -1,101 +1,120 @@
 #include "StdAfx.h"
 #include "cObjMap.h"
 #include "cObjLoader.h"
-#include "cGroup.h"
+#include "cMtlTex.h"
 
 cObjMap::cObjMap(void)
+	: m_mapMesh(NULL)
+
 {
 }
 
 
 cObjMap::~cObjMap(void)
 {
-	for each(auto p in m_vecGroup)
+	SAFE_RELEASE(m_mapMesh);
+	for each(auto p in m_vecMtlTex)
 	{
-		SAFE_DELETE(p);
+		SAFE_RELEASE(p);
 	}
 }
 
 void cObjMap::Load( char* szMap, char* szSurface, D3DXMATRIXA16* pmat )
 {
 	cObjLoader l;
-	l.Load(szMap, m_vecGroup);
+	m_mapMesh = l.Load(szMap, m_vecMtlTex, NULL);
 
-	std::vector<D3DXVECTOR3> vecV;
+	D3DXMatrixIdentity(&m_matWorld);
 
-	FILE* fp = NULL;
-	fopen_s(&fp, szSurface, "r");
-	while(!feof(fp))
-	{
-		char szBuf[1024] = {'\0', };
+	D3DXMATRIXA16 matS, matT;
+	D3DXMatrixIdentity(&matS);
+	D3DXMatrixIdentity(&matT);
+	D3DXMatrixScaling(&matS, 0.25f, 0.25f, 0.25f);
+	D3DXMatrixTranslation(&matT, 0.0f, 0.f, 0.f);
+	//m_matWorld = matS * matT;
+	//if (szSurface)
+	//{
+	//	std::vector<D3DXVECTOR3> vecV;
 
-		fgets(szBuf, 1024, fp);
+	//	FILE* fp = NULL;
+	//	fopen_s(&fp, szSurface, "r");
+	//	while(!feof(fp))
+	//	{
+	//		char szBuf[1024] = {'\0', };
 
-		if(strlen(szBuf) == 0)
-			continue;
+	//		fgets(szBuf, 1024, fp);
 
-		if (szBuf[0] == '#')
-		{
-			continue;
-		}
-		else if (szBuf[0] == 'v' && szBuf[1] < 33)
-		{
-			float x, y, z;
-			sscanf_s(szBuf, "%*s %f %f %f", &x, &y, &z);
-			vecV.push_back(D3DXVECTOR3(x, y, z));
-		}
-		else if (szBuf[0] == 'f')
-		{
-			int aIndex[3];
-			sscanf_s(szBuf, "%*s %d/%*d/%*d %d/%*d/%*d %d/%*d/%*d",
-				&aIndex[0], &aIndex[1], &aIndex[2]);
+	//		if(strlen(szBuf) == 0)
+	//			continue;
 
-			for (int i = 0; i < 3; ++i)
-			{
-				D3DXVECTOR3 p = vecV[aIndex[i] - 1];
-				if(pmat)
-				{
-					D3DXVec3TransformCoord(&p, &p, pmat);
-				}
-				m_vecSurface.push_back(p);
-			}
-		}
-	}
-	fclose(fp);
+	//		if (szBuf[0] == '#')
+	//		{
+	//			continue;
+	//		}
+	//		else if (szBuf[0] == 'v' && szBuf[1] < 33)
+	//		{
+	//			float x, y, z;
+	//			sscanf_s(szBuf, "%*s %f %f %f", &x, &y, &z);
+	//			vecV.push_back(D3DXVECTOR3(x, y, z));
+	//		}
+	//		else if (szBuf[0] == 'f')
+	//		{
+	//			int aIndex[3];
+	//			sscanf_s(szBuf, "%*s %d/%*d/%*d %d/%*d/%*d %d/%*d/%*d",
+	//				&aIndex[0], &aIndex[1], &aIndex[2]);
+
+	//			for (int i = 0; i < 3; ++i)
+	//			{
+	//				D3DXVECTOR3 p = vecV[aIndex[i] - 1];
+	//				if(pmat)
+	//				{
+	//					D3DXVec3TransformCoord(&p, &p, pmat);
+	//				}
+	//				m_vecSurface.push_back(p);
+	//			}
+	//		}
+	//	}
+	//	fclose(fp);
+	//}
+
 }
 
 bool cObjMap::GetHeight( IN float x, OUT float& y, IN float z )
 {
-	D3DXVECTOR3 vRayPos(x, 1000, z);
+	D3DXVECTOR3 vRayPos(x, 10000, z);
 	D3DXVECTOR3 vRayDir(0, -1, 0);
 
-	for (size_t i = 0; i < m_vecSurface.size(); i += 3)
+	float u, v, d;
+	BOOL pHit;
+	DWORD pFaceIndex;
+	LPD3DXBUFFER ppAllHits;
+	DWORD pCountOfHits;
+	D3DXIntersect(m_mapMesh,
+		&vRayPos,
+		&vRayDir,
+		&pHit,
+		NULL,
+		&u, &v, &d,
+		NULL,
+		NULL);
+
+	//D3DXVECTOR3 temp(x, 10000-d, z);
+	//temp = 
+	if (pHit)
 	{
-		float u, v, d;
-		if(D3DXIntersectTri(&m_vecSurface[i + 0],
-			&m_vecSurface[i + 1],
-			&m_vecSurface[i + 2],
-			&vRayPos,
-			&vRayDir,
-			&u, &v, &d))
-		{
-			y = 1000 - d;
-			return true;
-		}
+		y = 10000 - d;
+		return true;
 	}
 	return false;
 }
 
 void cObjMap::Render()
 {
-	D3DXMATRIXA16 matS, matR, mat;
-	D3DXMatrixScaling(&matS, 0.01f, 0.01f, 0.01f);
-	//D3DXMatrixScaling(&matS, 1.0f, 1.0f, 1.0f);
-	D3DXMatrixRotationX(&matR, -D3DX_PI / 2);
-	mat = matS * matR;
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &mat);
-	for each(auto p in m_vecGroup)
+	for (size_t i = 0; i < m_vecMtlTex.size(); i++)
 	{
-		p->Render();
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+		g_pD3DDevice->SetMaterial(&m_vecMtlTex[i]->GetMtl());
+		g_pD3DDevice->SetTexture(0, m_vecMtlTex[i]->GetTexture());
+		m_mapMesh->DrawSubset(i);
 	}
 }

@@ -138,6 +138,12 @@ void cHeightMap::Load( char* szFolder, char* szRaw, char* szTexture, DWORD dwByt
 	m_pMtlTex->SetTexture(g_pTextureManager->GetTexture(sFolder + "/" + sTexture));
 }
 
+bool cHeightMap::GetHeightVec(D3DXVECTOR3& position)
+{
+	GetHeight(position.x, position.y, position.z);
+	return true;
+}
+
 bool cHeightMap::GetHeight( IN float x, OUT float& y, IN float z )
 {
 	if (x < 0 || x > m_nTileN || z < 0 || z > m_nTileN)

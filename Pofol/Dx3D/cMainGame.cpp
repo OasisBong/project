@@ -5,10 +5,12 @@
 #include "cCharController.h"
 #include "cSkinnedMesh.h"
 #include "cSkinnedMeshManager.h"
+#include "cObjMap.h"
 #include "cHeightMap.h"
 #include "cObjLoader.h"
 #include "cMtlTex.h"
 #include "cFiona.h"
+#include "cRegina.h"
 
 cMainGame::cMainGame(void)
 	: m_pCamera(NULL)
@@ -16,6 +18,7 @@ cMainGame::cMainGame(void)
 	, m_pCharController(NULL)
 	, m_pMap(NULL)
 	, m_pFiona(NULL)
+	, m_pRegina(NULL)
 {
 }
 
@@ -26,13 +29,7 @@ cMainGame::~cMainGame(void)
 	SAFE_DELETE(m_pCharController);
 	SAFE_DELETE(m_pMap);	
 	SAFE_DELETE(m_pFiona);
-
-
-	//SAFE_RELEASE(m_mapMesh);
-	//for each (auto p in m_vecMtlTex)
-	//{
-	//	SAFE_RELEASE(p);
-	//}
+	SAFE_DELETE(m_pRegina);
 
 	g_pFontManager->Destroy();
 	g_pTextureManager->Destroy();
@@ -51,16 +48,22 @@ void cMainGame::Setup()
 	
 	// Vindictus Map Test
 	//cObjLoader* pMap = new cObjLoader;
-	//m_mapMesh = pMap->Load("obj/map_1.obj", m_vecMtlTex);
+	//m_mapMesh = pMap->Load("./Map/Garden/map.obj", m_vecMtlTex);
+
+	m_pMap = new cObjMap;
+	m_pMap->Load("./Map/Garden/map.obj");
 
 	// HeightMap Dummy
-	cHeightMap* pMap = new cHeightMap;
-	pMap->Load("HeightMapData", "HeightMap.raw", "terrain.jpg");
-	m_pMap = pMap;
+	//cHeightMap* pMap = new cHeightMap;
+	//pMap->Load("HeightMapData", "HeightMap.raw", "terrain.jpg");
+	//m_pMap = pMap;
 
 	
 	m_pFiona = new cFiona;
 	m_pFiona->Setup();
+
+	m_pRegina = new cRegina;
+	m_pRegina->Setup();
 
 	m_pCharController = new cCharController;
 
@@ -77,6 +80,11 @@ void cMainGame::Update()
 	if (m_pFiona)
 	{
 		m_pFiona->Update(m_pCharController->GetWorldTM());
+	}
+
+	if (m_pRegina)
+	{
+		m_pRegina->Update();
 	}
 
 	if(m_pCamera)
@@ -101,30 +109,17 @@ void cMainGame::Render()
 		m_pGrid->Render();
 	
 	//HeightMap Render
-	if(m_pMap)
-	{
-		m_pMap->Render();
-	}
-
-	// Vindictus Map test
-
-	//D3DXMATRIXA16 world, matS, matT;
-	//D3DXMatrixIdentity(&world);
-	//D3DXMatrixIdentity(&matS);
-	//D3DXMatrixIdentity(&matT);
-	//D3DXMatrixScaling(&matS, 0.25f, 0.25f, 0.25f);
-	//D3DXMatrixTranslation(&matT, -1900.0f, 0.f, 0.f);
-	//world = matS * matT;
-
-	//for (size_t i = 0; i < m_vecMtlTex.size(); i++)
+	//if(m_pMap)
 	//{
-	//	g_pD3DDevice->SetTransform(D3DTS_WORLD, &world);
-	//	g_pD3DDevice->SetMaterial(&m_vecMtlTex[i]->GetMtl());
-	//	g_pD3DDevice->SetTexture(0, m_vecMtlTex[i]->GetTexture());
-	//	m_mapMesh->DrawSubset(i);
+	//	m_pMap->Render();
 	//}
 
+	// Vindictus Map test
+	m_pMap->Render();
+
 	m_pFiona->Render();
+	m_pRegina->Render();
+	//m_pRegina->Render((cHeightMap*)m_pMap);
 
 	g_pD3DDevice->EndScene();
 

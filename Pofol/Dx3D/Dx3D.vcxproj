@@ -101,6 +101,7 @@
     <ClInclude Include="cGrid.h" />
     <ClInclude Include="cGroup.h" />
     <ClInclude Include="cHeightMap.h" />
+    <ClInclude Include="cItemBase.h" />
     <ClInclude Include="cMainGame.h" />
     <ClInclude Include="cMtlTex.h" />
     <ClInclude Include="cObject.h" />
@@ -110,6 +111,7 @@
     <ClInclude Include="cPyramid.h" />
     <ClInclude Include="cRay.h" />
     <ClInclude Include="cRegina.h" />
+    <ClInclude Include="cSkillManager.h" />
     <ClInclude Include="cSkinnedMesh.h" />
     <ClInclude Include="cSkinnedMeshManager.h" />
     <ClInclude Include="cSokobanChar.h" />
@@ -124,6 +126,7 @@
     <ClInclude Include="iCharacter.h" />
     <ClInclude Include="iMap.h" />
     <ClInclude Include="cKeyManager.h" />
+    <ClInclude Include="MY_UTIL.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="cSoundManager.h" />
@@ -149,6 +152,7 @@
     <ClCompile Include="cGrid.cpp" />
     <ClCompile Include="cGroup.cpp" />
     <ClCompile Include="cHeightMap.cpp" />
+    <ClCompile Include="cItemBase.cpp" />
     <ClCompile Include="cMainGame.cpp" />
     <ClCompile Include="cMtlTex.cpp" />
     <ClCompile Include="cObject.cpp" />
@@ -158,6 +162,7 @@
     <ClCompile Include="cPyramid.cpp" />
     <ClCompile Include="cRay.cpp" />
     <ClCompile Include="cRegina.cpp" />
+    <ClCompile Include="cSkillManager.cpp" />
     <ClCompile Include="cSkinnedMesh.cpp" />
     <ClCompile Include="cSkinnedMeshManager.cpp" />
     <ClCompile Include="cSokobanChar.cpp" />
