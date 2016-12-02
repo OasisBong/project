@@ -90,7 +90,8 @@ void cMainGame::Update()
 	if (m_pCamera)
 	{
 		m_pCamera->Update(m_pCharController->GetPosition());
-		SetCamera();
+		//m_pCamera->Update(m_pCharController->GetPosition(), CameraDistance());
+		
 	}
 
 	g_pAutoReleasePool->Drain();
@@ -151,27 +152,57 @@ void cMainGame::WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam )
 	}
 }
 
-void cMainGame::SetLight()
-{
-	D3DLIGHT9 stLight;
-	stLight.Ambient = stLight.Diffuse = stLight.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	stLight.Type = D3DLIGHT_DIRECTIONAL;
-	D3DXVECTOR3 vDir(1, -1, 1);
-	D3DXVec3Normalize(&vDir, &vDir);
-	stLight.Direction = vDir;
-	g_pD3DDevice->SetLight(0, &stLight);
+//void cMainGame::SetLight()
+//{
+//	D3DLIGHT9 stLight;
+//	stLight.Ambient = stLight.Diffuse = stLight.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+//	stLight.Type = D3DLIGHT_DIRECTIONAL;
+//	D3DXVECTOR3 vDir(1, -1, 1);
+//	D3DXVec3Normalize(&vDir, &vDir);
+//	stLight.Direction = vDir;
+//	g_pD3DDevice->SetLight(0, &stLight);
+//
+//	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+//	g_pD3DDevice->SetRenderState(D3DRS_NORMALIZENORMALS, true);
+//	g_pD3DDevice->LightEnable(0, true);
+//}
+//
+//D3DXVECTOR3* cMainGame::SetCamera()
+//{
+//	D3DXVECTOR3 vRayPos = *m_pCharController->GetPosition();
+//	D3DXVECTOR3 vRayDir = m_pCamera->GetEye();
+//	D3DXVec3Normalize(&vRayDir, &vRayDir);
+//	
+//	BOOL pHit;
+//	float u, v, d;
+//	//DWORD pFaceIndex;
+//	D3DXIntersect(m_pMap->GetMapMesh(),
+//		&vRayPos,
+//		&vRayDir,
+//		&pHit,
+//		NULL,
+//		&u, &v, &d,
+//		NULL,
+//		NULL);
+//
+//	
+//	//D3DXVECTOR3 temp(x, 10000-d, z);
+//	//temp = 
+//	if (pHit)
+//	{
+//		D3DXVECTOR3 temp = vRayPos + (d * vRayDir);
+//		return &temp;
+//	}
+//	return NULL;
+//}
 
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-	g_pD3DDevice->SetRenderState(D3DRS_NORMALIZENORMALS, true);
-	g_pD3DDevice->LightEnable(0, true);
-}
 
-D3DXVECTOR3* cMainGame::SetCamera()
+float cMainGame::CameraDistance()
 {
 	D3DXVECTOR3 vRayPos = *m_pCharController->GetPosition();
 	D3DXVECTOR3 vRayDir = m_pCamera->GetEye();
 	D3DXVec3Normalize(&vRayDir, &vRayDir);
-	
+
 	BOOL pHit;
 	float u, v, d;
 	//DWORD pFaceIndex;
@@ -183,13 +214,11 @@ D3DXVECTOR3* cMainGame::SetCamera()
 		&u, &v, &d,
 		NULL,
 		NULL);
-
-	//D3DXVECTOR3 temp(x, 10000-d, z);
-	//temp = 
-	if (pHit)
+	
+	if (pHit && D3DXVec3Length(&(vRayDir - vRayPos)) > d)
 	{
-		D3DXVECTOR3 temp = vRayPos + (d * vRayDir);
-		return &temp;
-	}
-	return NULL;
+		return d;
+	}		
+	return 0;
 }
+

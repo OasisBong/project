@@ -35,6 +35,7 @@ public:
 	void Render();
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	void SetLight();
-	D3DXVECTOR3* SetCamera();
+	//D3DXVECTOR3* SetCamera();
+	//float CameraDistance();
 };
 
