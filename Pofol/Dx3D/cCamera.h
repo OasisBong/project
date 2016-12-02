@@ -1,0 +1,25 @@
+#pragma once
+
+class cCamera
+{
+private:
+	SYNTHESIZE(D3DXVECTOR3, m_vEye, Eye);
+
+private:
+	D3DXVECTOR3		m_vLookAt;
+	D3DXVECTOR3		m_vUp;
+	bool			m_isLButtonDown;
+	POINT			m_ptPrevMouse;
+	float			m_fAngleX;
+	float			m_fAngleY;
+	float			m_fDistance;
+
+public:
+	cCamera(void);
+	~cCamera(void);
+
+	void Setup();
+	void Update(D3DXVECTOR3* pTarget = NULL, D3DXVECTOR3* vEye = NULL);
+	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+};
+
