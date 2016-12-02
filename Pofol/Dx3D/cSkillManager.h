@@ -5,7 +5,7 @@
 class cSkillManager
 {
 public:
-	SINGLETONE(cSkinnedMeshManager);
+	//SINGLETONE(cSkinnedMeshManager);
 
-	void Destroy()
+	void Destroy();
 };

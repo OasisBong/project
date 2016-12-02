@@ -87,8 +87,11 @@ void cMainGame::Update()
 		m_pRegina->Update();
 	}
 
-	if(m_pCamera)
+	if (m_pCamera)
+	{
 		m_pCamera->Update(m_pCharController->GetPosition());
+		SetCamera();
+	}
 
 	g_pAutoReleasePool->Drain();
 }
@@ -163,3 +166,30 @@ void cMainGame::SetLight()
 	g_pD3DDevice->LightEnable(0, true);
 }
 
+D3DXVECTOR3* cMainGame::SetCamera()
+{
+	D3DXVECTOR3 vRayPos = *m_pCharController->GetPosition();
+	D3DXVECTOR3 vRayDir = m_pCamera->GetEye();
+	D3DXVec3Normalize(&vRayDir, &vRayDir);
+	
+	BOOL pHit;
+	float u, v, d;
+	//DWORD pFaceIndex;
+	D3DXIntersect(m_pMap->GetMapMesh(),
+		&vRayPos,
+		&vRayDir,
+		&pHit,
+		NULL,
+		&u, &v, &d,
+		NULL,
+		NULL);
+
+	//D3DXVECTOR3 temp(x, 10000-d, z);
+	//temp = 
+	if (pHit)
+	{
+		D3DXVECTOR3 temp = vRayPos + (d * vRayDir);
+		return &temp;
+	}
+	return NULL;
+}

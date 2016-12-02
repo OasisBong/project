@@ -26,10 +26,6 @@ private:
 	//HeightMap
 	cObjMap*						m_pMap;
 	
-	//Vindictus Map test
-	LPD3DXMESH					m_mapMesh;
-	std::vector<cMtlTex*>		m_vecMtlTex;
-	
 public:
 	cMainGame(void);
 	~cMainGame(void);
@@ -39,5 +35,6 @@ public:
 	void Render();
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	void SetLight();
+	D3DXVECTOR3* SetCamera();
 };
 

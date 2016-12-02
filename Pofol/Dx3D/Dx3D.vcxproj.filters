@@ -70,6 +70,9 @@
     <Filter Include="Character\Controller">
       <UniqueIdentifier>{e417b480-c551-4fc1-bdeb-477e48883d92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lib">
+      <UniqueIdentifier>{aba22ed2-c568-4eaf-b127-5d1772135a63}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -207,9 +210,6 @@
     <ClInclude Include="cRegina.h">
       <Filter>Character\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="hStruct.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="cItemBase.h">
       <Filter>Item</Filter>
     </ClInclude>
@@ -228,11 +228,14 @@
     <ClInclude Include="cCharController.h">
       <Filter>Character\Controller</Filter>
     </ClInclude>
-    <ClInclude Include="cSkillManager.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="hStruct.h">
+      <Filter>Lib</Filter>
     </ClInclude>
     <ClInclude Include="MY_UTIL.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="cSkillManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -366,7 +369,7 @@
       <Filter>Character\Controller</Filter>
     </ClCompile>
     <ClCompile Include="cSkillManager.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
