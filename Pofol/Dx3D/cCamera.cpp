@@ -36,8 +36,22 @@ void cCamera::Setup()
 	g_pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 }
 
+<<<<<<< HEAD
 void cCamera::Update(D3DXVECTOR3* pTarget, D3DXVECTOR3* vEye)
 {
+=======
+//void cCamera::Update(D3DXVECTOR3* pTarget, float distance)
+void cCamera::Update(D3DXVECTOR3* pTarget, cObjMap* pMap)
+{
+	//if(distance)
+	//{
+	//	m_vEye = D3DXVECTOR3(0, 0, -distance);
+	//}
+	//else
+	//{
+	//	m_vEye = D3DXVECTOR3(0, 0, -m_fDistance);
+	//}
+>>>>>>> 334c4bf429a1b8a487a5d7e734bf19981cd1149b
 	m_vEye = D3DXVECTOR3(0, 0, -m_fDistance);
 	m_vLookAt = D3DXVECTOR3(0, 0, 0);
 
@@ -56,11 +70,14 @@ void cCamera::Update(D3DXVECTOR3* pTarget, D3DXVECTOR3* vEye)
 		m_vLookAt = m_vLookAt + *pTarget;
 	}
 
+<<<<<<< HEAD
 	if (vEye)
 	{
 		m_vEye = *vEye;
 	}
 
+=======
+>>>>>>> 334c4bf429a1b8a487a5d7e734bf19981cd1149b
 	D3DXMATRIXA16 matView;
 	D3DXMatrixLookAtLH(&matView, &m_vEye, &m_vLookAt, &m_vUp);
 	g_pD3DDevice->SetTransform(D3DTS_VIEW, &matView);
