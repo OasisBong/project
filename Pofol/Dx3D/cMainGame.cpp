@@ -47,9 +47,6 @@ void cMainGame::Setup()
 	m_pGrid->Setup(30);
 	
 	// Vindictus Map Test
-	//cObjLoader* pMap = new cObjLoader;
-	//m_mapMesh = pMap->Load("./Map/Garden/map.obj", m_vecMtlTex);
-
 	m_pMap = new cObjMap;
 	m_pMap->Load("./Map/Garden/map.obj");
 
@@ -89,7 +86,7 @@ void cMainGame::Update()
 
 	if (m_pCamera)
 	{
-		m_pCamera->Update(m_pCharController->GetPosition(), m_pMap);
+		m_pCamera->Update(m_pMap, m_pCharController->GetPosition());
 		//m_pCamera->Update(m_pCharController->GetPosition(), CameraDistance());
 		
 	}
@@ -152,21 +149,21 @@ void cMainGame::WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam )
 	}
 }
 
-//void cMainGame::SetLight()
-//{
-//	D3DLIGHT9 stLight;
-//	stLight.Ambient = stLight.Diffuse = stLight.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-//	stLight.Type = D3DLIGHT_DIRECTIONAL;
-//	D3DXVECTOR3 vDir(1, -1, 1);
-//	D3DXVec3Normalize(&vDir, &vDir);
-//	stLight.Direction = vDir;
-//	g_pD3DDevice->SetLight(0, &stLight);
-//
-//	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-//	g_pD3DDevice->SetRenderState(D3DRS_NORMALIZENORMALS, true);
-//	g_pD3DDevice->LightEnable(0, true);
-//}
-//
+void cMainGame::SetLight()
+{
+	D3DLIGHT9 stLight;
+	stLight.Ambient = stLight.Diffuse = stLight.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	stLight.Type = D3DLIGHT_DIRECTIONAL;
+	D3DXVECTOR3 vDir(1, -1, 1);
+	D3DXVec3Normalize(&vDir, &vDir);
+	stLight.Direction = vDir;
+	g_pD3DDevice->SetLight(0, &stLight);
+
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	g_pD3DDevice->SetRenderState(D3DRS_NORMALIZENORMALS, true);
+	g_pD3DDevice->LightEnable(0, true);
+}
+
 //D3DXVECTOR3* cMainGame::SetCamera()
 //{
 //	D3DXVECTOR3 vRayPos = *m_pCharController->GetPosition();

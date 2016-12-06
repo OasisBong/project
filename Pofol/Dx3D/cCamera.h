@@ -19,7 +19,7 @@ public:
 	~cCamera(void);
 
 	void Setup();
-	void Update(D3DXVECTOR3* pTarget = NULL, cObjMap* pMap);
+	void Update(cObjMap* pMap, D3DXVECTOR3* pTarget = NULL);
 	//void Update(D3DXVECTOR3* pTarget = NULL, float distance = 0);
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 };

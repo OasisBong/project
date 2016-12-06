@@ -37,7 +37,7 @@ void cCamera::Setup()
 }
 
 //void cCamera::Update(D3DXVECTOR3* pTarget, float distance)
-void cCamera::Update(D3DXVECTOR3* pTarget, cObjMap* pMap)
+void cCamera::Update(cObjMap* pMap, D3DXVECTOR3* pTarget)
 {
 	//if(distance)
 	//{
