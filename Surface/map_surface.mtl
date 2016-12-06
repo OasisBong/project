@@ -1,0 +1,114 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# 파일 생성됨: 02.12.2016 14:43:18
+
+newmtl material_0
+	Ns 30.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5500 0.5500 0.5500
+	Kd 1.0000 1.0000 1.0000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\kim i w\Desktop\DirectX team\코드\20161128집에서-수정\161115_HeightMap - 복사본\Dx3D\garden\map_material_0.tga
+	map_Kd C:\Users\kim i w\Desktop\DirectX team\코드\20161128집에서-수정\161115_HeightMap - 복사본\Dx3D\garden\map_material_0.tga
+
+newmtl material_1
+	Ns 30.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5500 0.5500 0.5500
+	Kd 1.0000 1.0000 1.0000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\kim i w\Desktop\DirectX team\코드\20161128집에서-수정\161115_HeightMap - 복사본\Dx3D\garden\map_material_1.tga
+	map_Kd C:\Users\kim i w\Desktop\DirectX team\코드\20161128집에서-수정\161115_HeightMap - 복사본\Dx3D\garden\map_material_1.tga
+
+newmtl material_4
+	Ns 30.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5500 0.5500 0.5500
+	Kd 1.0000 1.0000 1.0000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\kim i w\Desktop\DirectX team\코드\20161128집에서-수정\161115_HeightMap - 복사본\Dx3D\garden\map_material_4.tga
+	map_Kd C:\Users\kim i w\Desktop\DirectX team\코드\20161128집에서-수정\161115_HeightMap - 복사본\Dx3D\garden\map_material_4.tga
+
+newmtl material_7
+	Ns 30.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5500 0.5500 0.5500
+	Kd 1.0000 1.0000 1.0000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\kim i w\Desktop\DirectX team\코드\20161128집에서-수정\161115_HeightMap - 복사본\Dx3D\garden\map_material_7.tga
+	map_Kd C:\Users\kim i w\Desktop\DirectX team\코드\20161128집에서-수정\161115_HeightMap - 복사본\Dx3D\garden\map_material_7.tga
+
+newmtl material_9
+	Ns 30.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5500 0.5500 0.5500
+	Kd 1.0000 1.0000 1.0000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\kim i w\Desktop\DirectX team\코드\20161128집에서-수정\161115_HeightMap - 복사본\Dx3D\garden\map_material_9.tga
+	map_Kd C:\Users\kim i w\Desktop\DirectX team\코드\20161128집에서-수정\161115_HeightMap - 복사본\Dx3D\garden\map_material_9.tga
+
+newmtl material_10
+	Ns 30.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5500 0.5500 0.5500
+	Kd 1.0000 1.0000 1.0000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\kim i w\Desktop\DirectX team\코드\20161128집에서-수정\161115_HeightMap - 복사본\Dx3D\garden\map_material_10.tga
+	map_Kd C:\Users\kim i w\Desktop\DirectX team\코드\20161128집에서-수정\161115_HeightMap - 복사본\Dx3D\garden\map_material_10.tga
+
+newmtl material_11
+	Ns 30.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5500 0.5500 0.5500
+	Kd 1.0000 1.0000 1.0000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\kim i w\Desktop\DirectX team\코드\20161128집에서-수정\161115_HeightMap - 복사본\Dx3D\garden\map_material_11.tga
+	map_Kd C:\Users\kim i w\Desktop\DirectX team\코드\20161128집에서-수정\161115_HeightMap - 복사본\Dx3D\garden\map_material_11.tga
+
+newmtl material_12
+	Ns 30.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5500 0.5500 0.5500
+	Kd 1.0000 1.0000 1.0000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\kim i w\Desktop\DirectX team\코드\20161128집에서-수정\161115_HeightMap - 복사본\Dx3D\garden\map_material_12.tga
+	map_Kd C:\Users\kim i w\Desktop\DirectX team\코드\20161128집에서-수정\161115_HeightMap - 복사본\Dx3D\garden\map_material_12.tga
