@@ -56,9 +56,6 @@ void cMainGame::Setup()
 	m_pGrid->Setup(30);
 	
 	// Vindictus Map Test
-	//cObjLoader* pMap = new cObjLoader;
-	//m_mapMesh = pMap->Load("./Map/Garden/map.obj", m_vecMtlTex);
-
 	m_pMap = new cObjMap;
 	m_pMap->Load("./Map/Garden/map.obj");
 
@@ -122,8 +119,6 @@ void cMainGame::Update()
 
 	if (m_pCamera)
 	{
-		m_pCamera->Update(m_pMap, m_pCharController->GetPosition());
-		//m_pCamera->Update(m_pCharController->GetPosition(), CameraDistance());		
 	}
 
 	g_pAutoReleasePool->Drain();
