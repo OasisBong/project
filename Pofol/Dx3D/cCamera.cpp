@@ -65,6 +65,7 @@ void cCamera::Update(cObjMap* pMap, D3DXVECTOR3* pTarget)
 		m_vLookAt = m_vLookAt + *pTarget;
 	}
 
+
 	D3DXMATRIXA16 matView;
 	D3DXMatrixLookAtLH(&matView, &m_vEye, &m_vLookAt, &m_vUp);
 	g_pD3DDevice->SetTransform(D3DTS_VIEW, &matView);
