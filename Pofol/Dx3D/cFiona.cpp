@@ -16,7 +16,7 @@ cFiona::~cFiona()
 
 void cFiona::Setup()
 {
-	m_pSkinnedMesh = new cSkinnedMesh("./Character/PC/Fiona/", "fiona.X");
+	m_pSkinnedMesh = new cSkinnedMesh("./Character/PC/Fiona2/", "fiona.X");
 	//m_pSkinnedMesh = new cSkinnedMesh("./Character/Monster/Regina/", "regina.X");
 }
 

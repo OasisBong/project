@@ -11,7 +11,11 @@
 #include "cMtlTex.h"
 #include "cFiona.h"
 #include "cRegina.h"
-
+#include "cUIObject.h"
+#include "cUIImageView.h"
+#include "cUITextView.h"
+#include "cUIButton.h"
+#include "cUIInterface.h"
 cMainGame::cMainGame(void)
 	: m_pCamera(NULL)
 	, m_pGrid(NULL)
@@ -19,6 +23,7 @@ cMainGame::cMainGame(void)
 	, m_pMap(NULL)
 	, m_pFiona(NULL)
 	, m_pRegina(NULL)
+	, m_pHPbars(NULL)
 {
 }
 
@@ -30,6 +35,10 @@ cMainGame::~cMainGame(void)
 	SAFE_DELETE(m_pMap);	
 	SAFE_DELETE(m_pFiona);
 	SAFE_DELETE(m_pRegina);
+
+	//UI관련 Release
+	SAFE_RELEASE(m_pHPbars);
+	SAFE_DELETE(m_pUIs);
 
 	g_pFontManager->Destroy();
 	g_pTextureManager->Destroy();
@@ -67,6 +76,30 @@ void cMainGame::Setup()
 
 	m_pCharController = new cCharController;
 
+	////////////////////////////////////////////////////////////////////////
+	///                UI셋팅                         //////////////////////
+	////////////////////////////////////////////////////////////////////////
+	m_pUIs = new cUIInterface;
+	m_pUIs->Setup();
+	//HP바 셋팅
+
+	//HP바 밖
+	//cUIImageView* hpBar_Out = new cUIImageView;
+	//hpBar_Out->SetTexture(g_pTextureManager->GetTexture("./UI/bar/hpBar_Out.png", &stImageInfo));
+	//hpBar_Out->SetSize(ST_SIZE(stImageInfo.Width, stImageInfo.Height));
+	//hpBar_Out->SetLocalPos(D3DXVECTOR3(350, 5, 0));	
+	//m_pHPbars = hpBar_Out;
+
+	//HP바 안
+	//cUIImageView* hpBar_In = new cUIImageView;
+	//hpBar_In->SetTexture(g_pTextureManager->GetTexture("./UI/bar/hpBar_In.png", &stImageInfo));
+	//hpBar_In->SetSize(ST_SIZE(stImageInfo.Width, stImageInfo.Height));
+	//hpBar_In->SetLocalPos(D3DXVECTOR3(2, 5, 0));
+	//m_pHPbars->AddChild(hpBar_In);
+	//SAFE_RELEASE(hpBar_In);
+	
+	
+	
 	SetLight();
 }
 
@@ -89,14 +122,8 @@ void cMainGame::Update()
 
 	if (m_pCamera)
 	{
-<<<<<<< HEAD
-		m_pCamera->Update(m_pCharController->GetPosition());
-		SetCamera();
-=======
-		m_pCamera->Update(m_pCharController->GetPosition(), m_pMap);
-		//m_pCamera->Update(m_pCharController->GetPosition(), CameraDistance());
-		
->>>>>>> 334c4bf429a1b8a487a5d7e734bf19981cd1149b
+		m_pCamera->Update(m_pMap, m_pCharController->GetPosition());
+		//m_pCamera->Update(m_pCharController->GetPosition(), CameraDistance());		
 	}
 
 	g_pAutoReleasePool->Drain();
@@ -117,19 +144,14 @@ void cMainGame::Render()
 	if(m_pGrid)
 		m_pGrid->Render();
 	
-	//HeightMap Render
-	//if(m_pMap)
-	//{
-	//	m_pMap->Render();
-	//}
 
 	// Vindictus Map test
 	m_pMap->Render();
 
 	m_pFiona->Render();
 	m_pRegina->Render();
-	//m_pRegina->Render((cHeightMap*)m_pMap);
 
+	m_pUIs->Render();
 	g_pD3DDevice->EndScene();
 
 	g_pD3DDevice->Present(NULL, NULL, NULL, NULL);
@@ -157,7 +179,6 @@ void cMainGame::WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam )
 	}
 }
 
-<<<<<<< HEAD
 void cMainGame::SetLight()
 {
 	D3DLIGHT9 stLight;
@@ -200,7 +221,6 @@ D3DXVECTOR3* cMainGame::SetCamera()
 	}
 	return NULL;
 }
-=======
 //void cMainGame::SetLight()
 //{
 //	D3DLIGHT9 stLight;
@@ -271,4 +291,3 @@ D3DXVECTOR3* cMainGame::SetCamera()
 //	return 0;
 //}
 
->>>>>>> 334c4bf429a1b8a487a5d7e734bf19981cd1149b

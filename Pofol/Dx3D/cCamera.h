@@ -1,9 +1,6 @@
 #pragma once
-<<<<<<< HEAD
 
-=======
 class cObjMap;
->>>>>>> 334c4bf429a1b8a487a5d7e734bf19981cd1149b
 class cCamera
 {
 private:
@@ -23,12 +20,9 @@ public:
 	~cCamera(void);
 
 	void Setup();
-<<<<<<< HEAD
-	void Update(D3DXVECTOR3* pTarget = NULL, D3DXVECTOR3* vEye = NULL);
-=======
-	void Update(D3DXVECTOR3* pTarget = NULL, cObjMap* pMap);
+	//void Update(D3DXVECTOR3* pTarget = NULL, D3DXVECTOR3* vEye = NULL);
+	void Update(cObjMap* pMap, D3DXVECTOR3* pTarget = NULL);
 	//void Update(D3DXVECTOR3* pTarget = NULL, float distance = 0);
->>>>>>> 334c4bf429a1b8a487a5d7e734bf19981cd1149b
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 };
 
