@@ -56,8 +56,11 @@ void cMainGame::Setup()
 	m_pGrid->Setup(30);
 	
 	// Vindictus Map Test
+	//cObjLoader* pMap = new cObjLoader;
+	//m_mapMesh = pMap->Load("./Map/Garden/map.obj", m_vecMtlTex);
+
 	m_pMap = new cObjMap;
-	m_pMap->Load("./Map/Garden/map.obj");
+	m_pMap->Load("./Map/Garden2/map.obj");
 
 	// HeightMap Dummy
 	//cHeightMap* pMap = new cHeightMap;
@@ -119,8 +122,10 @@ void cMainGame::Update()
 
 	if (m_pCamera)
 	{
+		m_pCamera->Update(m_pMap, m_pCharController->GetPosition());
+		//m_pCamera->Update(m_pCharController->GetPosition(), CameraDistance());		
 	}
-
+	m_pUIs->Update();
 	g_pAutoReleasePool->Drain();
 }
 
@@ -143,9 +148,9 @@ void cMainGame::Render()
 	// Vindictus Map test
 	m_pMap->Render();
 
+	
 	m_pFiona->Render();
 	m_pRegina->Render();
-
 	m_pUIs->Render();
 	g_pD3DDevice->EndScene();
 
