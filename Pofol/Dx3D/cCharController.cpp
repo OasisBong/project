@@ -50,8 +50,6 @@ void cCharController::Update(iMap* pMap)
 	}
 	if (GetKeyState('S') & 0x8000)
 	{
-		//m_vDirection = -m_vDirection;
-		//m_fAngle -= D3DX_PI / 2;
 		p = p + m_vDirection * m_fSpeed;
 	}
 	

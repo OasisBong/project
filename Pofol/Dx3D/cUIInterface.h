@@ -4,7 +4,6 @@ class cUIInterface
 private:
 	D3DXMATRIXA16				m_mWorld_interface;
 
-
 	//HP바 스프라이트
 	LPD3DXSPRITE				m_pHPBar_IN;	//안쪽
 	LPD3DXSPRITE				m_pHPBar_Out;	//밖에쪽
@@ -25,6 +24,7 @@ private:
 	
 	//텍스트
 	char strpt[128];
+
 	//스킬단축키 창
 	LPD3DXSPRITE				m_pSkillWindow;//스킬단축키 창
 	LPDIRECT3DTEXTURE9			m_pTexSkillWindow;	//안쪽 텍스쳐

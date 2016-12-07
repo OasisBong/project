@@ -8,7 +8,10 @@ class cObjMap : public iMap
 private:
 	//Vindictus Map test
 	SYNTHESIZE(LPD3DXMESH, m_mapMesh, MapMesh);
+	SYNTHESIZE(LPD3DXMESH, m_mapHiddenMesh, MapHiddenMesh);
+	SYNTHESIZE(std::vector<LPD3DXMESH>, m_vecFlower, Flower);
 	SYNTHESIZE(vector<cMtlTex*>, m_vecMtlTex, vecMtlTex);
+	SYNTHESIZE(vector<cMtlTex*>, m_vecHiddenMtlTex, vecHiddenMtlTex);
 	SYNTHESIZE(D3DXMATRIX, m_matWorld, MatWorld);
 	
 	//vector<D3DXVECTOR3*>	m_vecSurface;

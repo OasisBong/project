@@ -39,7 +39,7 @@ void cUIInterface::Setup()
 	//HP바 밖에쪽 셋업
 	D3DXCreateTextureFromFileEx(
 		g_pD3DDevice,
-		"./UI/bar/hpBar_Out.png",
+		"./UI/bar/hpBar_Out.tga",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -57,7 +57,7 @@ void cUIInterface::Setup()
 	//HP바 안쪽 셋업
 	D3DXCreateTextureFromFileEx(
 		g_pD3DDevice,
-		"./UI/bar/hpBar_In.png",
+		"./UI/bar/hpBar_In.tga",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -81,13 +81,13 @@ void cUIInterface::Setup()
 	fd.CharSet = DEFAULT_CHARSET;
 	fd.OutputPrecision = OUT_DEFAULT_PRECIS;
 	fd.PitchAndFamily = FF_DONTCARE;
-	strcpy_s(fd.FaceName, "돋움");
+	strcpy_s(fd.FaceName, "Century Gothic");
 	D3DXCreateFontIndirect(g_pD3DDevice, &fd, &m_pHPBar_Font);
 
 	//SP바 밖에쪽 셋업
 	D3DXCreateTextureFromFileEx(
 		g_pD3DDevice,
-		"./UI/bar/hpBar_Out.png",
+		"./UI/bar/hpBar_Out.tga",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -105,7 +105,7 @@ void cUIInterface::Setup()
 	//SP바 안쪽 셋업
 	D3DXCreateTextureFromFileEx(
 		g_pD3DDevice,
-		"./UI/bar/spBar_In.png",
+		"./UI/bar/spBar_In.tga",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -129,13 +129,13 @@ void cUIInterface::Setup()
 	fd2.CharSet = DEFAULT_CHARSET;
 	fd2.OutputPrecision = OUT_DEFAULT_PRECIS;
 	fd2.PitchAndFamily = FF_DONTCARE;
-	strcpy_s(fd2.FaceName, "돋움");
+	strcpy_s(fd2.FaceName, "Century Gothic");
 	D3DXCreateFontIndirect(g_pD3DDevice, &fd2, &m_pSPBar_Font);
 
 	//스킬윈도우 셋업
 	D3DXCreateTextureFromFileEx(
 		g_pD3DDevice,
-		"./UI/window/skill_quickslot.png",
+		"./UI/window/skill_quickslot.tga",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -174,7 +174,7 @@ void cUIInterface::Render()
 	m_pHPBar_IN->Draw(m_pTexHPBar_IN,
 		&rcSrc2,
 		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(4, 5, 0),
+		&D3DXVECTOR3(8, 9, 0),
 		D3DCOLOR_XRGB(255, 255, 255));
 	m_pHPBar_IN->End();
 
@@ -196,7 +196,7 @@ void cUIInterface::Render()
 	m_pSPBar_IN->Draw(m_pTexSPBar_IN,
 		&rcSrc4,
 		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(4, 30, 0),
+		&D3DXVECTOR3(8, 33, 0),
 		D3DCOLOR_XRGB(255, 255, 255));
 	m_pSPBar_IN->End();
 
@@ -206,7 +206,7 @@ void cUIInterface::Render()
 	m_pHPBar_Font->DrawText(NULL, strpt, strlen(strpt), &textRc, DT_LEFT | DT_TOP | DT_NOCLIP, D3DCOLOR_XRGB(255, 255, 255));
 
 	RECT textRc2;
-	sprintf(strpt, "155 / 155");
+	sprintf(strpt, "155 / 155 / %d", m_stImageInfo_SPBar_IN.Width);
 	SetRect(&textRc2, 1070, 35, 0, 0);
 	m_pSPBar_Font->DrawText(NULL, strpt, strlen(strpt), &textRc2, DT_LEFT | DT_TOP | DT_NOCLIP, D3DCOLOR_XRGB(255, 255, 255));
 
@@ -217,11 +217,12 @@ void cUIInterface::Render()
 	m_pSkillWindow->Draw(m_pTexSkillWindow,
 		&rcSrc5,
 		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(160, 550, 0),
+		&D3DXVECTOR3(130, 550, 0),
 		D3DCOLOR_XRGB(255, 255, 255));
 	m_pSkillWindow->End();
 }
 
 void cUIInterface::Update()
 {
+
 }
