@@ -1,3 +1,17 @@
-﻿  stdafx.cpp
-c:\users\kim i w\desktop\project\project\pofol\dx3d\stdafx.cpp : fatal error C1041: 프로그램 데이터베이스 'C:\Users\kim i w\Desktop\project\project\Pofol\Dx3D\Debug\vc140.idb'을(를) 열 수 없습니다. 여러 CL.EXE에서 동일한 .PDB 파일에 쓰는 경우 /FS를 사용하십시오.
-cl : 명령줄 warning D9028: 최소 다시 빌드에 실패했습니다. 정상 빌드로 되돌립니다.
+﻿  cObjLoader.cpp
+c:\users\kim i w\desktop\project\project\pofol\dx3d\cobjloader.cpp(296): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\kim i w\desktop\project\project\pofol\dx3d\cobjloader.cpp(420): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\xutility(2229): warning C4996: 'std::_Copy_impl': Function call with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xutility(2216): note: 'std::_Copy_impl' 선언을 참조하십시오.
+  c:\users\kim i w\desktop\project\project\pofol\dx3d\cobjloader.cpp(658): note: 컴파일 중인 함수 템플릿 인스턴스화 '_OutIt std::copy<std::_String_iterator<std::_String_val<std::_Simple_types<char>>>,char*>(_InIt,_InIt,_OutIt)'에 대한 참조를 확인하십시오.
+          with
+          [
+              _OutIt=char *,
+              _InIt=std::_String_iterator<std::_String_val<std::_Simple_types<char>>>
+          ]
+  cMainGame.cpp
+c:\users\kim i w\desktop\project\project\pofol\dx3d\cmaingame.cpp(77): warning C4316: 'cCharController': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\kim i w\desktop\project\project\pofol\dx3d\cmaingame.cpp(82): warning C4316: 'cUIInterface': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  코드를 생성하고 있습니다...
+c:\users\kim i w\desktop\project\project\pofol\dx3d\cmaingame.cpp(218): warning C4172: 지역 변수 또는 임시: temp의 주소를 반환하고 있습니다.
+  Dx3D.vcxproj -> C:\Users\kim i w\Desktop\project\project\Pofol\Debug\Dx3D.exe
