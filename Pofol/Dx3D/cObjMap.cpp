@@ -5,7 +5,7 @@
 
 cObjMap::cObjMap(void)
 	: m_mapMesh(NULL)
-
+	, m_mapHiddenMesh(NULL)
 {
 }
 
@@ -13,13 +13,17 @@ cObjMap::cObjMap(void)
 cObjMap::~cObjMap(void)
 {
 	SAFE_RELEASE(m_mapMesh);
-	//SAFE_RELEASE(m_mapHiddenMesh);
+	SAFE_RELEASE(m_mapHiddenMesh);
 
 	for each(auto p in m_vecMtlTex)
 	{
 		SAFE_RELEASE(p);
 	}
-	//for each(auto p in m_vecHiddenMtlTex)
+	for each(auto p in m_vecHiddenMtlTex)
+	{
+		SAFE_RELEASE(p);
+	}
+	//for each(auto p in m_vecFlower)
 	//{
 	//	SAFE_RELEASE(p);
 	//}
@@ -28,8 +32,10 @@ cObjMap::~cObjMap(void)
 void cObjMap::Load( char* szMap, char* szSurface, D3DXMATRIXA16* pmat )
 {
 	cObjLoader l;
-	m_mapMesh = l.Load(szMap, m_vecMtlTex,NULL);
-	/*m_mapMesh = l.Load(szMap,NULL, m_vecMtlTex, m_mapMesh, m_vecHiddenMtlTex, m_vecFlower);*/
+	//m_mapMesh = l.Load(szMap, m_vecMtlTex,NULL);
+	//m_mapMesh = l.Load(szMap, NULL, m_vecMtlTex, m_mapMesh, m_vecHiddenMtlTex, m_vecFlower);
+	l.Loadmap(szMap, NULL, m_vecMtlTex, m_mapMesh, m_vecHiddenMtlTex,  m_mapHiddenMesh);
+	
 
 	D3DXMatrixIdentity(&m_matWorld);
 
@@ -61,8 +67,6 @@ bool cObjMap::GetHeight( IN float x, OUT float& y, IN float z )
 		NULL,
 		NULL);
 
-	//D3DXVECTOR3 temp(x, 10000-d, z);
-	//temp = 
 	if (pHit)
 	{
 		y = 10000 - d;
@@ -81,11 +85,11 @@ void cObjMap::Render()
 		m_mapMesh->DrawSubset(i);
 	}
 
-	//for (size_t i = 0; i < m_vecHiddenMtlTex.size(); i++)
-	//{
-	//	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-	//	g_pD3DDevice->SetMaterial(&m_vecHiddenMtlTex[i]->GetMtl());
-	//	g_pD3DDevice->SetTexture(0, m_vecHiddenMtlTex[i]->GetTexture());
-	//	m_mapHiddenMesh->DrawSubset(i);
-	//}
+	for (size_t i = 0; i < m_vecHiddenMtlTex.size(); i++)
+	{
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+		g_pD3DDevice->SetMaterial(&m_vecHiddenMtlTex[i]->GetMtl());
+		g_pD3DDevice->SetTexture(0, m_vecHiddenMtlTex[i]->GetTexture());
+		m_mapHiddenMesh->DrawSubset(i);
+	}
 }

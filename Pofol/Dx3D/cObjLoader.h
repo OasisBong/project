@@ -19,6 +19,10 @@ public:
 	LPD3DXMESH Load(IN char* szFilename, IN D3DXMATRIX* pMat,
 		OUT std::vector<cMtlTex*>& vecMtlTex, OUT LPD3DXMESH& mesh,
 		OUT std::vector<cMtlTex*>& vecHiddenMtlTex, OUT std::vector<LPD3DXMESH>& vecHiddenMesh);
+
+	void Loadmap(IN char* szFilename, IN D3DXMATRIX* pMat,
+		OUT std::vector<cMtlTex*>& vecMtlTex, OUT LPD3DXMESH& mesh,
+		OUT std::vector<cMtlTex*>& vecHiddenMtlTex, OUT LPD3DXMESH& hiddenmesh);
 	
 	void LoadMtlLib(char* szFilename);
 	void LoadMtlLib(IN char* szFilename, OUT std::vector<cMtlTex*>& vecMtlTex);
@@ -26,6 +30,7 @@ public:
 
 	bool StartsWith(char* str, char* beginStr);
 	char* StringToChar(string input);
+	LPD3DXMESH getHiddenMash(OUT LPD3DXMESH& mash_out);
 
 };
 
