@@ -29,13 +29,13 @@ cObjMap::~cObjMap(void)
 	//}
 }
 
-void cObjMap::Load( char* szMap, char* szSurface, D3DXMATRIXA16* pmat )
+void cObjMap::Load(char* szMap, char* szSurface, D3DXMATRIXA16* pmat)
 {
 	cObjLoader l;
 	//m_mapMesh = l.Load(szMap, m_vecMtlTex,NULL);
 	//m_mapMesh = l.Load(szMap, NULL, m_vecMtlTex, m_mapMesh, m_vecHiddenMtlTex, m_vecFlower);
-	l.Loadmap(szMap, NULL, m_vecMtlTex, m_mapMesh, m_vecHiddenMtlTex,  m_mapHiddenMesh);
-	
+	l.Loadmap(szMap, NULL, m_vecMtlTex, m_mapMesh, m_vecHiddenMtlTex, m_mapHiddenMesh);
+
 
 	D3DXMatrixIdentity(&m_matWorld);
 
@@ -44,11 +44,11 @@ void cObjMap::Load( char* szMap, char* szSurface, D3DXMATRIXA16* pmat )
 	D3DXMatrixIdentity(&matT);
 	D3DXMatrixScaling(&matS, 0.25f, 0.25f, 0.25f);
 	D3DXMatrixTranslation(&matT, 0.0f, 0.f, 0.f);
-	
+
 
 }
 
-bool cObjMap::GetHeight( IN float x, OUT float& y, IN float z )
+bool cObjMap::GetHeight(IN float x, OUT float& y, IN float z)
 {
 	D3DXVECTOR3 vRayPos(x, 10000, z);
 	D3DXVECTOR3 vRayDir(0, -1, 0);

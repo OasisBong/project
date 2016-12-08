@@ -6,6 +6,8 @@ using namespace std;
 //		## cKeyManager ## (키매니져)
 //==================================================================
 
+#define KEYMANAGER cKeyManager::getSingleton()
+
 #define KEYMAX 256
 
 class cKeyManager : public singletonBase <cKeyManager>

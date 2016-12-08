@@ -1,5 +1,4 @@
 #pragma once
-
 class cObjMap;
 class cCamera
 {
@@ -20,7 +19,6 @@ public:
 	~cCamera(void);
 
 	void Setup();
-	//void Update(D3DXVECTOR3* pTarget = NULL, D3DXVECTOR3* vEye = NULL);
 	void Update(cObjMap* pMap, D3DXVECTOR3* pTarget = NULL);
 	//void Update(D3DXVECTOR3* pTarget = NULL, float distance = 0);
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

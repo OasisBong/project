@@ -5,6 +5,8 @@
 #pragma comment(lib, "lib/fmodex_vc.lib")
 using namespace FMOD;
 
+#define SoundManager cSoundManager::getSingleton()
+
 //채널버퍼, 사운드버퍼
 #define EXTRACHANNELBUFFER 5
 #define SOUNDBUFFER 20

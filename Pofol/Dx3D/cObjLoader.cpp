@@ -11,7 +11,7 @@ cObjLoader::~cObjLoader(void)
 {
 }
 
-void cObjLoader::Load( IN char* szFilename, OUT std::vector<cGroup*>& vecGroup, IN D3DXMATRIXA16* pmat )
+void cObjLoader::Load(IN char* szFilename, OUT std::vector<cGroup*>& vecGroup, IN D3DXMATRIXA16* pmat)
 
 {
 	m_mapMtlTex.clear();
@@ -24,13 +24,13 @@ void cObjLoader::Load( IN char* szFilename, OUT std::vector<cGroup*>& vecGroup, 
 
 	FILE* fp = NULL;
 	fopen_s(&fp, szFilename, "r");
-	while(!feof(fp))
+	while (!feof(fp))
 	{
-		char szBuf[1024] = {'\0', };
-		
+		char szBuf[1024] = { '\0', };
+
 		fgets(szBuf, 1024, fp);
-		
-		if(strlen(szBuf) == 0)
+
+		if (strlen(szBuf) == 0)
 			continue;
 
 		if (szBuf[0] == '#')
@@ -95,7 +95,7 @@ void cObjLoader::Load( IN char* szFilename, OUT std::vector<cGroup*>& vecGroup, 
 				v.t = vecVT[aIndex[i][1] - 1];
 				v.n = vecVN[aIndex[i][2] - 1];
 
-				if(pmat)
+				if (pmat)
 				{
 					D3DXVec3TransformNormal(&v.n, &vecVN[aIndex[i][2] - 1], pmat);
 					D3DXVec3TransformCoord(&v.p, &vecV[aIndex[i][0] - 1], pmat);
@@ -112,7 +112,7 @@ void cObjLoader::Load( IN char* szFilename, OUT std::vector<cGroup*>& vecGroup, 
 	}
 }
 
-LPD3DXMESH cObjLoader::Load( IN char* szFilename, OUT std::vector<cMtlTex*>& vecMtlTex, IN D3DXMATRIXA16* pmat /*= NULL*/ )
+LPD3DXMESH cObjLoader::Load(IN char* szFilename, OUT std::vector<cMtlTex*>& vecMtlTex, IN D3DXMATRIXA16* pmat /*= NULL*/)
 {
 	m_mapMtlTex.clear();
 
@@ -126,13 +126,13 @@ LPD3DXMESH cObjLoader::Load( IN char* szFilename, OUT std::vector<cMtlTex*>& vec
 
 	FILE* fp = NULL;
 	fopen_s(&fp, szFilename, "r");
-	while(!feof(fp))
+	while (!feof(fp))
 	{
-		char szBuf[1024] = {'\0', };
+		char szBuf[1024] = { '\0', };
 
 		fgets(szBuf, 1024, fp);
 
-		if(strlen(szBuf) == 0)
+		if (strlen(szBuf) == 0)
 			continue;
 
 		if (szBuf[0] == '#')
@@ -146,7 +146,7 @@ LPD3DXMESH cObjLoader::Load( IN char* szFilename, OUT std::vector<cMtlTex*>& vec
 			LoadMtlLib(szMtlPath, vecMtlTex);
 		}
 		else if (szBuf[0] == 'g')
-		{	
+		{
 		}
 		else if (szBuf[0] == 'v')
 		{
@@ -190,7 +190,7 @@ LPD3DXMESH cObjLoader::Load( IN char* szFilename, OUT std::vector<cMtlTex*>& vec
 				v.t = vecVT[aIndex[i][1] - 1];
 				v.n = vecVN[aIndex[i][2] - 1];
 
-				if(pmat)
+				if (pmat)
 				{
 					D3DXVec3TransformNormal(&v.n, &vecVN[aIndex[i][2] - 1], pmat);
 					D3DXVec3TransformCoord(&v.p, &vecV[aIndex[i][0] - 1], pmat);
@@ -538,7 +538,7 @@ void cObjLoader::Loadmap(IN char* szFilename, IN D3DXMATRIX* pMat,
 				if (StartsWith(StringToChar(sMtlName), "Flower"))
 				{
 					vecHiddenVertex.push_back(v);
-				}	
+				}
 				else
 				{
 					vecVertex.push_back(v);
@@ -632,19 +632,19 @@ void cObjLoader::Loadmap(IN char* szFilename, IN D3DXMATRIX* pMat,
 		NULL);
 }
 
-void cObjLoader::LoadMtlLib( char* szFilename )
+void cObjLoader::LoadMtlLib(char* szFilename)
 {
 	std::string sMtlName;
 
 	FILE* fp = NULL;
 	fopen_s(&fp, szFilename, "r");
-	while(!feof(fp))
+	while (!feof(fp))
 	{
-		char szBuf[1024] = {'\0', };
+		char szBuf[1024] = { '\0', };
 
 		fgets(szBuf, 1024, fp);
 
-		if(strlen(szBuf) == 0)
+		if (strlen(szBuf) == 0)
 			continue;
 
 		if (szBuf[0] == '#')
@@ -692,19 +692,19 @@ void cObjLoader::LoadMtlLib( char* szFilename )
 	fclose(fp);
 }
 
-void cObjLoader::LoadMtlLib( IN char* szFilename, OUT std::vector<cMtlTex*>& vecMtlTex )
+void cObjLoader::LoadMtlLib(IN char* szFilename, OUT std::vector<cMtlTex*>& vecMtlTex)
 {
 	std::string sMtlName;
 
 	FILE* fp = NULL;
 	fopen_s(&fp, szFilename, "r");
-	while(!feof(fp))
+	while (!feof(fp))
 	{
-		char szBuf[1024] = {'\0', };
+		char szBuf[1024] = { '\0', };
 
 		fgets(szBuf, 1024, fp);
 
-		if(strlen(szBuf) == 0)
+		if (strlen(szBuf) == 0)
 			continue;
 
 		if (szBuf[0] == '#')
@@ -795,7 +795,7 @@ void cObjLoader::LoadMtlLib(IN char * szFilename, OUT std::vector<cMtlTex*>& vec
 				vecMtlTex.push_back(m_mapMtlTex[sMtlName]);
 				hiddenMtl = false;
 			}
-		}	
+		}
 		else if (szBuf[0] == 'K')
 		{
 			if (szBuf[1] == 'a')
@@ -857,7 +857,7 @@ void cObjLoader::LoadMtlLib(IN char * szFilename, OUT std::vector<cMtlTex*>& vec
 			{
 				m_mapMtlTex[sMtlName]->SetTexture(g_pTextureManager->GetTexture(szTexturePath));
 			}
-			
+
 		}
 	}
 	fclose(fp);

@@ -13,7 +13,7 @@ private:
 	SYNTHESIZE(vector<cMtlTex*>, m_vecMtlTex, vecMtlTex);
 	SYNTHESIZE(vector<cMtlTex*>, m_vecHiddenMtlTex, vecHiddenMtlTex);
 	SYNTHESIZE(D3DXMATRIX, m_matWorld, MatWorld);
-	
+
 	//vector<D3DXVECTOR3*>	m_vecSurface;
 public:
 	cObjMap(void);
