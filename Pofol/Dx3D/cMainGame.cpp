@@ -11,6 +11,7 @@
 #include "cMtlTex.h"
 #include "cFiona.h"
 #include "cRegina.h"
+#include "cUIInterface.h"
 
 cMainGame::cMainGame(void)
 	: m_pCamera(NULL)
@@ -30,6 +31,8 @@ cMainGame::~cMainGame(void)
 	SAFE_DELETE(m_pMap);	
 	SAFE_DELETE(m_pFiona);
 	SAFE_DELETE(m_pRegina);
+
+	SAFE_DELETE(m_pUIs);
 
 	g_pFontManager->Destroy();
 	g_pTextureManager->Destroy();
@@ -57,6 +60,12 @@ void cMainGame::Setup()
 
 	m_pCharController = new cCharController;
 
+	////////////////////////////////////////////////////////////////////////
+	///                UI¼ÂÆÃ                         //////////////////////
+	////////////////////////////////////////////////////////////////////////
+	m_pUIs = new cUIInterface;
+	m_pUIs->Setup();
+
 	SetLight();
 }
 
@@ -82,6 +91,9 @@ void cMainGame::Update()
 	{
 		m_pCamera->Update(m_pMap, m_pCharController->GetPosition());
 	}
+
+	m_pUIs->Update();
+
 	g_pAutoReleasePool->Drain();
 }
 
@@ -105,6 +117,8 @@ void cMainGame::Render()
 
 	m_pFiona->Render();
 	m_pRegina->Render();
+
+	m_pUIs->Render();
 
 	g_pD3DDevice->EndScene();
 
