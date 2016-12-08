@@ -1,5 +1,5 @@
 # 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
-# 颇老 积己凳: 28.11.2016 22:55:32
+# 颇老 积己凳: 08.12.2016 18:29:19
 
 newmtl material_0
 Ns 30.0000
@@ -334,3 +334,71 @@ Ks 0.0000 0.0000 0.0000
 Ke 0.0000 0.0000 0.0000
 map_Ka ./Map/Garden/map_material_23.tga
 map_Kd ./Map/Garden/map_material_23.tga
+
+newmtl wire_174186203
+Ns 32.0000
+Ni 1.5000
+d 1.0000
+Tr 0.0000
+Tf 1.0000 1.0000 1.0000 
+illum 2
+Ka 0.6824 0.7294 0.7961
+Kd 0.6824 0.7294 0.7961
+Ks 0.3500 0.3500 0.3500
+Ke 0.0000 0.0000 0.0000
+
+newmtl Flower_A
+Ns 10.0000
+Ni 1.5000
+d 1.0000
+Tr 0.0000
+Tf 1.0000 1.0000 1.0000 
+illum 2
+Ka 0.5880 0.5880 0.5880
+Kd 0.5880 0.5880 0.5880
+Ks 0.0000 0.0000 0.0000
+Ke 0.0000 0.0000 0.0000
+map_Ka ./Map/Garden/flower_b.tga
+map_Kd ./Map/Garden/flower_b.tga
+
+newmtl Flower_B
+Ns 10.0000
+Ni 1.5000
+d 1.0000
+Tr 0.0000
+Tf 1.0000 1.0000 1.0000 
+illum 2
+Ka 0.5880 0.5880 0.5880
+Kd 0.5880 0.5880 0.5880
+Ks 0.0000 0.0000 0.0000
+Ke 0.0000 0.0000 0.0000
+map_Ka ./Map/Garden/flower_a.tga
+map_Kd ./Map/Garden/flower_a.tga
+
+newmtl Material__5705
+Ns 10.0000
+Ni 1.5000
+d 1.0000
+Tr 0.0000
+Tf 1.0000 1.0000 1.0000 
+illum 2
+Ka 0.5880 0.5880 0.5880
+Kd 0.5880 0.5880 0.5880
+Ks 0.0000 0.0000 0.0000
+Ke 0.0000 0.0000 0.0000
+map_Ka ./Map/Garden/flower_b.tga
+map_Kd ./Map/Garden/flower_b.tga
+
+newmtl Material__5706
+Ns 10.0000
+Ni 1.5000
+d 1.0000
+Tr 0.0000
+Tf 1.0000 1.0000 1.0000 
+illum 2
+Ka 0.5880 0.5880 0.5880
+Kd 0.5880 0.5880 0.5880
+Ks 0.0000 0.0000 0.0000
+Ke 0.0000 0.0000 0.0000
+map_Ka ./Map/Garden/flower_a.tga
+map_Kd ./Map/Garden/flower_a.tga
