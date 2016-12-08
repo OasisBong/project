@@ -1,6 +1,6 @@
 #pragma once
 
-#define g_pSkinnedMeshManager cSkinnedMeshManager::GetInstance()
+//#define g_pSkinnedMeshManager cSkinnedMeshManager::GetInstance()
 
 class cSkillManager
 {

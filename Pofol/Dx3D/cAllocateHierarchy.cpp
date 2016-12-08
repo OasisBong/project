@@ -88,7 +88,9 @@ STDMETHODIMP cAllocateHierarchy::CreateMeshContainer( THIS_ LPCSTR Name,
 	// pMeshData->pMesh를 원본 메쉬에 복사
 	if(pMeshData && pMeshData->pMesh)
 	{
-		D3DXVECTOR3 vMin(0, 0, 0), vMax(0, 0, 0);
+		D3DXVECTOR3 vMin(FLT_MAX, FLT_MAX, FLT_MAX);
+		D3DXVECTOR3 vMax(FLT_MIN, FLT_MIN, FLT_MIN);
+		//D3DXVECTOR3 vMin(0, 0, 0), vMax(0, 0, 0);
 
 		LPVOID pV = NULL;
 		pMeshData->pMesh->LockVertexBuffer(0, &pV);
@@ -99,6 +101,13 @@ STDMETHODIMP cAllocateHierarchy::CreateMeshContainer( THIS_ LPCSTR Name,
 			&vMax);
 		D3DXVec3Minimize(&m_vMin, &m_vMin, &vMin);
 		D3DXVec3Maximize(&m_vMax, &m_vMax, &vMax);
+
+		D3DXComputeBoundingSphere((D3DXVECTOR3*)pV,
+			pMeshData->pMesh->GetNumVertices(),
+			D3DXGetFVFVertexSize(pMeshData->pMesh->GetFVF()),
+			&(m_stSphere.vCenter),
+			&(m_stSphere.fRadius));
+
 		pMeshData->pMesh->UnlockVertexBuffer();
 		
 		pMeshData->pMesh->CloneMeshFVF(

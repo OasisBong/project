@@ -3,6 +3,8 @@
 #include "cAllocateHierarchy.h"
 #include "cSkinnedMeshManager.h"
 
+
+
 cSkinnedMesh::cSkinnedMesh(char* szFolder, char* szFilename)
 	: m_pRootFrame(NULL)
 	, m_pAnimController(NULL)
@@ -10,6 +12,8 @@ cSkinnedMesh::cSkinnedMesh(char* szFolder, char* szFilename)
 	, m_pmWorkingPalette(NULL)
 	, m_pEffect(NULL)
 	, m_vPosition(0, 0, 0)
+	, m_isBlending(true)
+//	, m_fPassdeBlendingTime(0.f)
 {
 	cSkinnedMesh* pSkinnedMesh =  g_pSkinnedMeshManager->GetSkinnedMesh(szFolder, szFilename);
 	
@@ -17,7 +21,11 @@ cSkinnedMesh::cSkinnedMesh(char* szFolder, char* szFilename)
 	m_dwWorkingPaletteSize = pSkinnedMesh->m_dwWorkingPaletteSize;
 	m_pmWorkingPalette = pSkinnedMesh->m_pmWorkingPalette;
 	m_pEffect = pSkinnedMesh->m_pEffect;
+
 	m_stBoundingSphere = pSkinnedMesh->m_stBoundingSphere;
+
+	m_Min = pSkinnedMesh->GetMin();
+	m_Max = pSkinnedMesh->GetMax();
 
 	pSkinnedMesh->m_pAnimController->CloneAnimationController(
 		pSkinnedMesh->m_pAnimController->GetMaxNumAnimationOutputs(),
@@ -51,9 +59,6 @@ void cSkinnedMesh::Load( char* szDirectory, char* szFilename )
 	cAllocateHierarchy ah;
 	ah.SetDirectory(szDirectory);
 	ah.SetDefaultPaletteSize(nPaletteSize);
-	
-	m_stBoundingSphere.vCenter = (ah.GetMin() + ah.GetMax()) / 2.0f;
-	m_stBoundingSphere.fRadius = D3DXVec3Length( &(ah.GetMin() - ah.GetMax()) );
 
 	std::string sFullPath(szDirectory);
 	sFullPath += std::string(szFilename);
@@ -65,6 +70,13 @@ void cSkinnedMesh::Load( char* szDirectory, char* szFilename )
 		NULL,
 		(LPD3DXFRAME*)&m_pRootFrame,
 		&m_pAnimController);
+	
+	m_stBoundingSphere = ah.GetBoundingSphere();
+	//m_stBoundingSphere.vCenter = (ah.GetMin() + ah.GetMax()) / 2.0f;
+	//m_stBoundingSphere.fRadius = D3DXVec3Length(&(ah.GetMin() - ah.GetMax()));
+
+	m_Min = ah.GetMin();
+	m_Max = ah.GetMax();
 
 	if( m_pmWorkingPalette )
 		delete [] m_pmWorkingPalette;
@@ -89,10 +101,36 @@ void cSkinnedMesh::UpdateAndRender(D3DXMATRIXA16* pmat)
 
 	if(m_pRootFrame)
 	{
-		//D3DXMATRIXA16 mat;
-		//D3DXMatrixTranslation(&mat, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+		if (m_isBlending)
+		{
+			m_fPassedBlendingTime += g_pTimeManager->GetDeltaTime();
+			float f = m_fPassedBlendingTime / BLENDINGTIME;
 
-		Update(m_pRootFrame, pmat);
+			if (f >= 1.0f)
+			{
+				f = 1.0f;
+				m_isBlending = false;
+				m_pAnimController->SetTrackEnable(1, false);
+				m_pAnimController->SetTrackWeight(0, 1.0f);
+			}
+			else
+			{
+				m_pAnimController->SetTrackWeight(1, 1.0f - f);
+				m_pAnimController->SetTrackWeight(0, f);
+			}
+		}
+
+		D3DXMATRIXA16 mat;
+		if (pmat)
+		{
+			mat = *pmat;
+		}
+		else
+		{
+			D3DXMatrixTranslation(&mat, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+		}
+
+		Update(m_pRootFrame, &mat);
 		Render(m_pRootFrame);
 	}
 }
@@ -111,13 +149,13 @@ void cSkinnedMesh::Render(ST_BONE* pBone /*= NULL*/)
 		LPD3DXBONECOMBINATION pBoneCombos = 
 			( LPD3DXBONECOMBINATION )( pBoneMesh->pBufBoneCombos->GetBufferPointer() );
 
-		D3DXMATRIXA16 matViewProj, matView, matProj;
 
 		// alphatest Ã³¸®
 		g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, true);
 		g_pD3DDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 		g_pD3DDevice->SetRenderState(D3DRS_ALPHAREF, 0.5f);
 
+		D3DXMATRIXA16 matViewProj, matView, matProj;
 		g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
 		g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
 		matViewProj = matView * matProj;
@@ -157,7 +195,8 @@ void cSkinnedMesh::Render(ST_BONE* pBone /*= NULL*/)
 
 			// we're pretty much ignoring the materials we got from the x-file; just set
 			// the texture here
-			m_pEffect->SetTexture( "g_txScene", pBoneMesh->vecTexture[ pBoneCombos[ dwAttrib ].AttribId ] );
+			if (!pBoneMesh->vecTexture.empty())
+				m_pEffect->SetTexture( "g_txScene", pBoneMesh->vecTexture[ pBoneCombos[ dwAttrib ].AttribId ] );
 
 			// set the current number of bones; this tells the effect which shader to use
 			m_pEffect->SetInt( "CurNumBones", pBoneMesh->dwMaxNumFaceInfls - 1 );
@@ -316,9 +355,75 @@ void cSkinnedMesh::SetAnimationIndex( int* nIndex )
 	{
 		*nIndex = 0;
 	}
+
+	LPD3DXANIMATIONSET pPrevAnimSet = NULL;
+	LPD3DXANIMATIONSET pNextAnimSet = NULL;
+	//m_pAnimController->ResetTime();
+
+	D3DXTRACK_DESC desc;
+
+	m_pAnimController->GetTrackAnimationSet(0, &pPrevAnimSet);
+	m_pAnimController->GetTrackDesc(0, &desc);
+	m_pAnimController->SetTrackDesc(1, &desc);
+	m_pAnimController->SetTrackWeight(1, 1.0f);
+
+	m_pAnimController->GetAnimationSet(*nIndex, &pNextAnimSet);
+	m_pAnimController->SetTrackAnimationSet(1, pPrevAnimSet);
+	m_pAnimController->SetTrackAnimationSet(0, pNextAnimSet);
+	m_pAnimController->SetTrackEnable(0, true);
+	m_pAnimController->SetTrackPosition(0, 0.0f);
+	m_pAnimController->SetTrackWeight(0, 0.0f);
+
+	m_fPassedBlendingTime = 0.0f;
+	m_isBlending = true;
+
+	SAFE_RELEASE(pPrevAnimSet);
+	SAFE_RELEASE(pNextAnimSet);
+}
+
+void cSkinnedMesh::SetAnimationIndex(int nIndex, float& period)
+{
+	if (!m_pAnimController)
+		return;
+	LPD3DXANIMATIONSET pPrevAnimSet = NULL;
+	LPD3DXANIMATIONSET pNextAnimSet = NULL;
+	//m_pAnimController->ResetTime();
+
+	D3DXTRACK_DESC desc;
+
+	m_pAnimController->GetTrackAnimationSet(0, &pPrevAnimSet);
+	m_pAnimController->GetTrackDesc(0, &desc);
+	m_pAnimController->SetTrackDesc(1, &desc);
+	m_pAnimController->SetTrackWeight(1, 1.0f);
+
+	m_pAnimController->GetAnimationSet(nIndex, &pNextAnimSet);
+	m_pAnimController->SetTrackAnimationSet(1, pPrevAnimSet);
+	m_pAnimController->SetTrackAnimationSet(0, pNextAnimSet);
+	m_pAnimController->SetTrackEnable(0, true);
+	m_pAnimController->SetTrackPosition(0, 0.0f);
+	m_pAnimController->SetTrackWeight(0, 0.0f);
+
+	m_fPassedBlendingTime = 0.0f;
+	m_isBlending = true;
+
+	period = pNextAnimSet->GetPeriod() - BLENDINGTIME;
+
+	SAFE_RELEASE(pPrevAnimSet);
+	SAFE_RELEASE(pNextAnimSet);
+}
+
+void cSkinnedMesh::SetAnimatinoIndexNotBlend(int nindex, float& period)
+{
+	if (!m_pAnimController)
+		return;
 	LPD3DXANIMATIONSET pAnimSet = NULL;
-	m_pAnimController->GetAnimationSet(*nIndex, &pAnimSet);
+	//m_pAnimController->ResetTime();
+
+	m_pAnimController->GetAnimationSet(nindex, &pAnimSet);
 	m_pAnimController->SetTrackAnimationSet(0, pAnimSet);
+	m_pAnimController->SetTrackPosition(0, 0.0f);
+
+	period = pAnimSet->GetPeriod() - BLENDINGTIME;
 	SAFE_RELEASE(pAnimSet);
 }
 

@@ -12,7 +12,6 @@ class cSkinnedMesh;
 class cMtlTex;
 class cFiona;
 class cRegina;
-class cUIInterface;
 
 class cMainGame
 {
@@ -25,14 +24,8 @@ private:
 	cRegina*					m_pRegina;
 	
 	//HeightMap
-	cObjMap*					m_pMap;
+	cObjMap*						m_pMap;
 	
-	//UI
-	LPD3DXFONT					m_pFont;
-	LPD3DXSPRITE				m_pHPBar_Out;
-	cUIObject*					m_pHPbars;
-
-	cUIInterface*				m_pUIs;
 public:
 	cMainGame(void);
 	~cMainGame(void);
@@ -42,7 +35,6 @@ public:
 	void Render();
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	void SetLight();
-	D3DXVECTOR3* SetCamera();
 	//D3DXVECTOR3* SetCamera();
 	//float CameraDistance();
 };

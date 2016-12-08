@@ -13,23 +13,16 @@ cObjMap::cObjMap(void)
 cObjMap::~cObjMap(void)
 {
 	SAFE_RELEASE(m_mapMesh);
-	//SAFE_RELEASE(m_mapHiddenMesh);
-
 	for each(auto p in m_vecMtlTex)
 	{
 		SAFE_RELEASE(p);
 	}
-	//for each(auto p in m_vecHiddenMtlTex)
-	//{
-	//	SAFE_RELEASE(p);
-	//}
 }
 
 void cObjMap::Load( char* szMap, char* szSurface, D3DXMATRIXA16* pmat )
 {
 	cObjLoader l;
-	m_mapMesh = l.Load(szMap, m_vecMtlTex,NULL);
-	/*m_mapMesh = l.Load(szMap,NULL, m_vecMtlTex, m_mapMesh, m_vecHiddenMtlTex, m_vecFlower);*/
+	m_mapMesh = l.Load(szMap, m_vecMtlTex, NULL);
 
 	D3DXMatrixIdentity(&m_matWorld);
 
@@ -38,7 +31,51 @@ void cObjMap::Load( char* szMap, char* szSurface, D3DXMATRIXA16* pmat )
 	D3DXMatrixIdentity(&matT);
 	D3DXMatrixScaling(&matS, 0.25f, 0.25f, 0.25f);
 	D3DXMatrixTranslation(&matT, 0.0f, 0.f, 0.f);
-	
+	//m_matWorld = matS * matT;
+	//if (szSurface)
+	//{
+	//	std::vector<D3DXVECTOR3> vecV;
+
+	//	FILE* fp = NULL;
+	//	fopen_s(&fp, szSurface, "r");
+	//	while(!feof(fp))
+	//	{
+	//		char szBuf[1024] = {'\0', };
+
+	//		fgets(szBuf, 1024, fp);
+
+	//		if(strlen(szBuf) == 0)
+	//			continue;
+
+	//		if (szBuf[0] == '#')
+	//		{
+	//			continue;
+	//		}
+	//		else if (szBuf[0] == 'v' && szBuf[1] < 33)
+	//		{
+	//			float x, y, z;
+	//			sscanf_s(szBuf, "%*s %f %f %f", &x, &y, &z);
+	//			vecV.push_back(D3DXVECTOR3(x, y, z));
+	//		}
+	//		else if (szBuf[0] == 'f')
+	//		{
+	//			int aIndex[3];
+	//			sscanf_s(szBuf, "%*s %d/%*d/%*d %d/%*d/%*d %d/%*d/%*d",
+	//				&aIndex[0], &aIndex[1], &aIndex[2]);
+
+	//			for (int i = 0; i < 3; ++i)
+	//			{
+	//				D3DXVECTOR3 p = vecV[aIndex[i] - 1];
+	//				if(pmat)
+	//				{
+	//					D3DXVec3TransformCoord(&p, &p, pmat);
+	//				}
+	//				m_vecSurface.push_back(p);
+	//			}
+	//		}
+	//	}
+	//	fclose(fp);
+	//}
 
 }
 
@@ -60,9 +97,7 @@ bool cObjMap::GetHeight( IN float x, OUT float& y, IN float z )
 		&u, &v, &d,
 		NULL,
 		NULL);
-
-	//D3DXVECTOR3 temp(x, 10000-d, z);
-	//temp = 
+	
 	if (pHit)
 	{
 		y = 10000 - d;
@@ -80,12 +115,4 @@ void cObjMap::Render()
 		g_pD3DDevice->SetTexture(0, m_vecMtlTex[i]->GetTexture());
 		m_mapMesh->DrawSubset(i);
 	}
-
-	//for (size_t i = 0; i < m_vecHiddenMtlTex.size(); i++)
-	//{
-	//	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-	//	g_pD3DDevice->SetMaterial(&m_vecHiddenMtlTex[i]->GetMtl());
-	//	g_pD3DDevice->SetTexture(0, m_vecHiddenMtlTex[i]->GetTexture());
-	//	m_mapHiddenMesh->DrawSubset(i);
-	//}
 }

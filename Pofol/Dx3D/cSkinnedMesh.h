@@ -1,5 +1,7 @@
 #pragma once
 
+#define BLENDINGTIME 0.3f
+
 struct ST_BONE;
 
 class cSkinnedMesh
@@ -16,15 +18,25 @@ private:
 
 	// 객체마다 생성
 	D3DXVECTOR3					m_vPosition;
-	LPD3DXANIMATIONCONTROLLER	m_pAnimController;
-	//SYNTHESIZE(LPD3DXANIMATIONCONTROLLER, m_pAnimController, AnimController);
+	SYNTHESIZE(D3DXVECTOR3, m_Min, Min);
+	SYNTHESIZE(D3DXVECTOR3, m_Max, Max);
+	SYNTHESIZE_PASS_BY_REF(
+		LPD3DXANIMATIONCONTROLLER, m_pAnimController, AniController)
 
+private:
+	bool						m_isBlending;
+	float						m_fPassedBlendingTime;
+	
 public:
 	cSkinnedMesh(char* szFolder, char* szFilename);
 	~cSkinnedMesh(void);
 	
 	void UpdateAndRender(D3DXMATRIXA16* pmat = NULL);
 	void SetAnimationIndex(int* nIndex);
+
+	// Funtion For Blenbing
+	void SetAnimationIndex(int nIndex, float& period);
+	void SetAnimatinoIndexNotBlend(int nindex, float& period);
 
 	void SetRandomTrackPosition(); // 테스트용
 	void SetPosition(D3DXVECTOR3 v)
@@ -36,6 +48,11 @@ public:
 	{
 		return &m_stBoundingSphere;
 	}
+
+	ST_BONE* GetRoot() { return m_pRootFrame; }
+	LPD3DXANIMATIONCONTROLLER GetAnicon() { return m_pAnimController; }
+
+
 private:
 	cSkinnedMesh();
 	void Load(char* szFolder, char* szFilename);

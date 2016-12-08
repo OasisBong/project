@@ -237,8 +237,8 @@
     <ClInclude Include="cSkillManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="cUIInterface.h">
-      <Filter>UI</Filter>
+    <ClInclude Include="cOBB.h">
+      <Filter>Character\Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -374,8 +374,8 @@
     <ClCompile Include="cSkillManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="cUIInterface.cpp">
-      <Filter>UI</Filter>
+    <ClCompile Include="cOBB.cpp">
+      <Filter>Character\Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

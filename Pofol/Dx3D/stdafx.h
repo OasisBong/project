@@ -175,8 +175,9 @@ struct ST_SIZE
 #include "cTextureManager.h"
 #include "cFontManager.h"
 #include "cSkillManager.h"
+#include "hStruct.h"
 #include "MY_UTIL.h"
-
+using namespace MY_UTIL;
 
 #include "cObject.h"
 #include "cUIObject.h"
