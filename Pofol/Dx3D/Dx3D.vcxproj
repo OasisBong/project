@@ -123,6 +123,7 @@
     <ClInclude Include="cTimeManager.h" />
     <ClInclude Include="cUIButton.h" />
     <ClInclude Include="cUIImageView.h" />
+    <ClInclude Include="cUIInterface.h" />
     <ClInclude Include="cUIObject.h" />
     <ClInclude Include="cUITextView.h" />
     <ClInclude Include="Dx3D.h" />
@@ -175,6 +176,7 @@
     <ClCompile Include="cTimeManager.cpp" />
     <ClCompile Include="cUIButton.cpp" />
     <ClCompile Include="cUIImageView.cpp" />
+    <ClCompile Include="cUIInterface.cpp" />
     <ClCompile Include="cUIObject.cpp" />
     <ClCompile Include="cUITextView.cpp" />
     <ClCompile Include="Dx3D.cpp" />

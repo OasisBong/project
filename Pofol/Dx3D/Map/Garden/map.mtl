@@ -1,5 +1,5 @@
 # 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
-# 颇老 积己凳: 08.12.2016 18:29:19
+# 颇老 积己凳: 08.12.2016 20:18:56
 
 newmtl material_0
 Ns 30.0000
@@ -402,3 +402,85 @@ Ks 0.0000 0.0000 0.0000
 Ke 0.0000 0.0000 0.0000
 map_Ka ./Map/Garden/flower_a.tga
 map_Kd ./Map/Garden/flower_a.tga
+
+newmtl Flower_10
+Ns 10.0000
+Ni 1.5000
+d 1.0000
+Tr 0.0000
+Tf 1.0000 1.0000 1.0000 
+illum 2
+Ka 0.5880 0.5880 0.5880
+Kd 0.5880 0.5880 0.5880
+Ks 0.0000 0.0000 0.0000
+Ke 0.0000 0.0000 0.0000
+
+newmtl Flower_11
+Ns 10.0000
+Ni 1.5000
+d 1.0000
+Tr 0.0000
+Tf 1.0000 1.0000 1.0000 
+illum 2
+Ka 0.5880 0.5880 0.5880
+Kd 0.5880 0.5880 0.5880
+Ks 0.0000 0.0000 0.0000
+Ke 0.0000 0.0000 0.0000
+map_Ka ./Map/Garden/sky_night_cloudy_01up.tga
+map_Kd ./Map/Garden/sky_night_cloudy_01up.tga
+
+newmtl Flower_12
+Ns 10.0000
+Ni 1.5000
+d 1.0000
+Tr 0.0000
+Tf 1.0000 1.0000 1.0000 
+illum 2
+Ka 0.5880 0.5880 0.5880
+Kd 0.5880 0.5880 0.5880
+Ks 0.0000 0.0000 0.0000
+Ke 0.0000 0.0000 0.0000
+map_Ka ./Map/Garden/sky_night_cloudy_01ft.tga
+map_Kd ./Map/Garden/sky_night_cloudy_01ft.tga
+
+newmtl Flower_13
+Ns 10.0000
+Ni 1.5000
+d 1.0000
+Tr 0.0000
+Tf 1.0000 1.0000 1.0000 
+illum 2
+Ka 0.5880 0.5880 0.5880
+Kd 0.5880 0.5880 0.5880
+Ks 0.0000 0.0000 0.0000
+Ke 0.0000 0.0000 0.0000
+map_Ka ./Map/Garden/sky_night_cloudy_01lf.tga
+map_Kd ./Map/Garden/sky_night_cloudy_01lf.tga
+
+newmtl Flower_14
+Ns 10.0000
+Ni 1.5000
+d 1.0000
+Tr 0.0000
+Tf 1.0000 1.0000 1.0000 
+illum 2
+Ka 0.5880 0.5880 0.5880
+Kd 0.5880 0.5880 0.5880
+Ks 0.0000 0.0000 0.0000
+Ke 0.0000 0.0000 0.0000
+map_Ka ./Map/Garden/sky_night_cloudy_01bk.tga
+map_Kd ./Map/Garden/sky_night_cloudy_01bk.tga
+
+newmtl Flower_15
+Ns 10.0000
+Ni 1.5000
+d 1.0000
+Tr 0.0000
+Tf 1.0000 1.0000 1.0000 
+illum 2
+Ka 0.5880 0.5880 0.5880
+Kd 0.5880 0.5880 0.5880
+Ks 0.0000 0.0000 0.0000
+Ke 0.0000 0.0000 0.0000
+map_Ka ./Map/Garden/sky_night_cloudy_01rt.tga
+map_Kd ./Map/Garden/sky_night_cloudy_01rt.tga

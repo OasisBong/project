@@ -12,6 +12,7 @@ class cSkinnedMesh;
 class cMtlTex;
 class cFiona;
 class cRegina;
+class cUIInterface;
 
 class cMainGame
 {
@@ -25,7 +26,9 @@ private:
 	
 	//HeightMap
 	cObjMap*						m_pMap;
-	
+
+	//UI
+	cUIInterface*				m_pUIs;
 public:
 	cMainGame(void);
 	~cMainGame(void);
