@@ -1,6 +1,0 @@
-﻿  cUIInterface.cpp
-c:\users\kim i w\desktop\project\project\pofol\dx3d\cuiinterface.cpp(204): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\kim i w\desktop\project\project\pofol\dx3d\cuiinterface.cpp(209): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-  Dx3D.vcxproj -> C:\Users\kim i w\Desktop\project\project\Pofol\Debug\Dx3D.exe
